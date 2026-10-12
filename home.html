@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Her Voice, Her Power | Girls Safety NGO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <!-- AOS Scroll Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* ------------------ General Styles ------------------ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      margin: auto;
+    }
+    #donate{
+     font-size: 18px;
+      background:#ff5768;
+      color:rgb(255, 255, 255);
+       padding: 15px 30px;
+      margin: 0 10px;
+      border-radius: 2rem;
+      font-weight: 450;
+      border: none;
+
+    }
+
+    /* ------------------ Header ------------------ */
+     header {
+    background:linear-gradient(150deg,#E9DFC3,#0118D8,#1B56FD,#E9DFC3);
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  header .container {
+    text-align: center; /* centers all inside */
+  }
+
+  header h1 {
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centers logo + text together */
+    gap: 10px;
+    margin-bottom: 10px; /* space between title and navbar */
+  }
+
+  header h1 img {
+    height: 100px;
+    width: 100px;
+    vertical-align: middle;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-evenly;
+    align-items: center;
+    display: inline-flex; /* align links in one line */
+    gap: 30px;
+    width: 90%;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  nav ul li a:hover {
+    text-decoration: underline;
+    color: #ffde59;
+  }
+  .nav-links li a.active {
+  color: #FFD700;
+  border-bottom: 2px solid #FFD700;
+}
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 10px 15px;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Add dropdown arrow */
+    .dropdown > a::after {
+      content: " ▼";
+      font-size: 12px;
+    }
+    /* ---------- LOGIN BUTTON ------------- */
+.login-btn {
+  background: linear-gradient(130deg, #f7ff11, #e916e6);
+  color: #000000;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+  transition: all 0.3s ease;
+  transform: perspective(500px) translateZ(0);
+}
+
+/* Hover 3D animation */
+.login-btn:hover {
+  transform: perspective(500px) translateZ(10px);
+  box-shadow: 0 10px 20px rgba(106, 13, 173, 0.6);
+}
+
+/* Click effect */
+.login-btn:active {
+  transform: perspective(500px) translateZ(3px);
+  box-shadow: 0 3px 10px rgba(106, 13, 173, 0.3);
+}
+
+.icon {
+  font-size: 18px;
+}
+    /* Search bar styling */
+     .search-bar {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .search-bar input {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    width: 500px;
+  }
+
+  .search-bar button {
+    background:linear-gradient(130deg, #f7ff11, #e916e6);
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .search-bar button:hover {
+    background-color: #ffd000;
+  } 
+    /* ------------------ Hero Section ------------------ */
+    .hero {
+      /* background: linear-gradient(135deg, #0d2a7a, #5781da); */
+      background: linear-gradient(135deg, #092778, #8bacf4);
+      color: white;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: rgba(255,255,255,0.05);
+      top: -50%;
+      left: -50%;
+      transform: rotate(45deg);
+      animation: rotateBg 20s linear infinite;
+    }
+
+    @keyframes rotateBg {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 750px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero-content h1 span {
+      color: #ff0000;
+      animation: wordFade 3s infinite;
+    }
+
+    @keyframes wordFade {
+      0%,100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons a {
+      padding: 15px 30px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-sos {
+      font-size: 25px;
+      background:linear-gradient(120deg, #ff929d, #b50214,#000000);
+      color: #ffffff;
+       padding: 15px 30px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-weight: 650;
+      border: none;
+      /* transition: 0.3s; */
+    }
+
+    .btn-sos:hover {
+      background: transparent;
+    }
+
+    .btn-report {
+      font-size: 25px;
+       background:linear-gradient(120deg, #ff929d, #b50214,#000000);
+      color: white;
+       padding: 15px 30px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: none;
+      /* transition: 0.3s; */
+    }
+
+    .btn-report:hover {
+      background:transparent ;
+    }
+
+    /* ------------------ Services Section ------------------ */
+    .services {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .services h1{
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .services h2 {
+      font-size: 30px;
+      color: #1E3A8A;
+      margin-bottom: 50px;
+    }
+
+    .service-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      width: 300px;
+      border-radius: 15px;
+      padding: 25px 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .card h3 {
+      color: #2563EB;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .card a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #000000;
+      color: white;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .card a:hover {
+      background: #2563EB;
+    }
+
+    /* ------------------ Quick Panel ------------------ */
+    .quick-panel {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 60px 0;
+      background: #f9fbff;
+    }
+
+    .quick-card {
+      background: white;
+      width: 240px;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .quick-card h3{
+      font-size: 25px;
+      margin-bottom: 15px;
+      color: #1E3A8A;
+    }
+
+    .quick-card p {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .quick-card button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #000000;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .quick-card button:hover {
+      background: #e58ce7;
+    }
+    #contact{
+      height: 50px;
+      width:50px;
+      vertical-align:middle;
+      margin-left:5px;
+    }
+    /* SOS BUTTON STYLING */
+.sos-btn2 {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 2000;
+  animation: pulseGlow 1.5s infinite;
+  transition: transform 0.3s ease;
+  background: none;     /* no background */
+  border: none;         /* remove border if any */
+}
+.sos-btn2, .sos-btn2 i {
+  background-color: transparent !important;
+}
+
+/* Image styling 
+ .sos-btn2 img {
+  width: 80px;
+  height: 80px;
+  background: none;     ensure transparent 
+  border: none;          no border 
+  border-radius: 50%;
+  pointer-events: none;  prevents image drag
+  filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); glowing light effect 
+} */
+
+/* Hover effect */
+.sos-btn2:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1));
+}
+
+/* Pulsing glow animation */
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1));
+    transform: scale(1.08);
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+    transform: scale(1.08);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    transform: scale(1);
+  }
+}
+    /* ------------------ Footer ------------------ */
+    footer {
+      background:linear-gradient(150deg,#E9DFC3,#0118D8,#1B56FD,#E9DFC3);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* ------------------ Responsive ------------------ */
+    @media (max-width: 992px) {
+      .service-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .quick-panel {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+  <div class="container">
+    <h1> <img src="logo.png" alt="Logo" data-aos="zoom-in-down">Her Voice, Her Power</h1>
+    <nav>
+     <ul>
+       <a href="#">Home</a>
+        <!-- About Us Dropdown -->
+      <li class="dropdown">
+        <a href="about3.html">About Us</a>
+        <div class="dropdown-content">
+          <a href="about us pages/our mission and vision.html">Vision & Mission</a>
+          <a href="about us pages/our team.html">Our Team</a>
+          <a href="about us pages/our jurn.html">Our Journey</a>
+        </div>
+      </li>
+        <!-- Initiative Dropdown -->
+      <li class="dropdown">
+        <a href="sdg.html">Initiatives</a>
+        <div class="dropdown-content">
+          <a href="sdg.html">Self Defence Training</a>
+          <a href="ashk.html">Awareness Campaigns</a>
+          <a href="edu.html">Education Programs</a>
+        </div>
+      </li>
+       <!-- Reports and Research Dropdown -->
+      <li class="dropdown">
+        <a href="#">Reports and Research</a>
+        <div class="dropdown-content">
+          <a href="annualreport/annual_report.html">Annual Reports</a>
+          <a href="case_study/case_studyfinal.html">Case studies</a>
+          <a href="publication/publication.html">Publications</a>
+        </div>
+      </li>
+        <!-- Legal rights Dropdown -->
+      <li class="dropdown">
+        <a href="#">Legal rights</a>
+        <div class="dropdown-content">
+          <a href="womens laws/womens law.html">Women Protection Laws</a>
+          <a href="chatboot.html">Complaint Procedure</a>
+          <a href="LAC.html">Legal Aid Center</a>
+        </div>
+      </li>
+       <!-- Get Involved -->
+      <li class="dropdown">
+         <a href="#">Get Involved</a>
+         <div class="dropdown-content">
+          <a href="vol2.html">Volunteer Form</a>
+          <a href="getInvolved/donate.html">Donate</a>
+         </div>
+      </li>
+       <!-- FAQ's  -->
+      <a href="FAQ3.html">FAQ'S</a>
+      <!-- feedback  -->
+      <a href="feedback.html">Feedback</a>
+      <!-- <button data-aos="flip-right" id="donate"><a href="donate.html">Donate Our NGO</a></button> -->
+       <button class="login-btn" onclick="window.location.href='signUp2.html'">
+    <span class="icon">👤</span> Log In
+  </button>
+     </ul>
+    </nav>
+      <!-- Search Bar -->
+       <div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search entire page...">
+  <button type="button" id="searchBtn">Search</button>
+</div>
+<div id="noResults" style="color:#ffde59; font-weight:600; display:none; margin-top:5px;">
+  <!-- No matching text found -->
+</div>
+
+    </div>
+  </div>
+</header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+  <!-- Background Video -->
+  <video autoplay muted loop class="hero-video">
+    <source src="homeVideo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="hero-content">
+    <h1>Your <span>Safety</span> is <span>Our Voice</span></h1>
+    <p>An NGO initiative empowering girls with real-time safety tools, helplines, and awareness resources.</p>
+    <div class="hero-buttons">
+      <button class="btn-sos" data-aos="flip-left"><a href="sos.html"  onclick="activateSOS()"><i class="fa-solid fa-triangle-exclamation"></i>SOS</a></button>
+      <button class="btn-report"  data-aos="flip-right"><a href="report.html"><i class="fa-solid fa-file-shield"></i> Report Incident</a></button>
+    </div>
+  </div>
+</section>
+  <!-- Services Section -->
+<section class="services" id="services">
+  <h1>What We Offer</h1>
+  <div class="container">
+    <div class="service-cards">
+
+      <!-- Events Card -->
+      <div class="card" data-aos="flip-left" data-aos-delay="100">
+        <h2><i class="fa-solid fa-calendar-days" style="color:#ff0000;"></i> Events & Workshops</h2>
+        <p>Explore our past and upcoming events.</p>
+        <a href="/Event/event.html">View Details</a>
+      </div>
+      <img src="hImg.png" alt="home img " style="width: fit-content; height: fit-content;">
+      <!-- Media Card -->
+      <div class="card" data-aos="flip-left" data-aos-delay="200">
+        <h2><i class="fa-solid fa-photo-film" style="color:#1879d3;"></i> Media Gallery</h2>
+        <p>Browse our photo and video collections.</p>
+        <a href="/media/media.html">View Gallery</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- Quick Panel -->
+  <section class="quick-panel">
+    <!-- <div class="quick-card">
+      <h4><i class="fa-solid fa-tower-broadcast" style="color: #ff0000;"></i>SOS</h4>
+      <p>Activate SOS and send your location</p>
+      <button onclick="window.location.href='sos.html'">Send SOS</button>
+    </div> -->
+    <div class="quick-card" data-aos="flip-down" data-aos-delay="350">
+      <h3><i class="fa-solid fa-phone-volume" style="color: #000000;"></i>Helpline and Support</h3>
+      <p>Immediate assistance and counseling.</p>
+      <button onclick="window.location.href='emerg.html'">Call Now</button>
+    </div>
+    <div class="quick-card" data-aos="flip-down" data-aos-delay="400">
+      <h3><i class="fa-solid fa-user-shield" style="color: #1a4d1a;"></i>Safety Tip</h3>
+      <p id="tip">Stay aware of surroundings in public areas.</p>
+      <button onclick="nextTip()">Next Tip</button>
+    </div>
+    <div class="quick-card" data-aos="flip-down" data-aos-delay="450">
+      <h3><i class="fa-solid fa-user" style="color: #f46201;"></i>User Profile</h3>
+      <p>Trusted contacts & saved reports</p>
+      <button onclick="window.location.href='userProfile.html'">Go to Profile</button>
+    </div>
+    <div class="quick-card" data-aos="flip-down" data-aos-delay="500">
+      <h3><img src="logo.png" alt="logo" id="contact"></i>Contact Us</h3>
+      <p>Contact Our team SecureHer</p>
+      <button onclick="window.location.href='contactUs.html'">Click me</button>
+    </div>
+  </section>
+  <!-- SOS Button -->
+  <a href="sos.html" class="sos-btn2" title="Emergency Help">
+    <i class="fa-solid fa-bell fa-shake fa-5x" style="color: #e10505;"></i>
+  </a>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Women's Safety Project | Designed with ❤️ by Team SecureHer</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+     AOS.init({ duration: 1000 });
+
+    // Dark mode toggle
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+    //JavaScript for Search
+    document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const noResultsEl = document.getElementById('noResults');
+
+  function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape special characters
+  }
+
+  function highlightPage() {
+    const query = searchInput.value.trim();
+    const body = document.body;
+
+    // First, remove previous highlights
+    const highlighted = body.querySelectorAll('span.search-highlight');
+    highlighted.forEach(span => {
+      span.replaceWith(document.createTextNode(span.textContent));
+    });
+
+    if (!query) {
+      noResultsEl.style.display = 'none';
+      return;
+    }
+
+    // Create regex
+    const regex = new RegExp(escapeRegex(query), 'gi');
+    let matchFound = false;
+
+    // Recursive function to highlight text in all text nodes
+    function highlightTextNodes(node) {
+      if (node.nodeType === 3) { // text node
+        const match = node.nodeValue.match(regex);
+        if (match) {
+          matchFound = true;
+          const span = document.createElement('span');
+          span.className = 'search-highlight';
+          span.style.background = 'yellow';
+          span.style.color = 'black';
+
+          const parts = node.nodeValue.split(regex);
+          const fragment = document.createDocumentFragment();
+
+          for (let i = 0; i < parts.length; i++) {
+            fragment.appendChild(document.createTextNode(parts[i]));
+            if (i < match.length) {
+              const highlightSpan = span.cloneNode();
+              highlightSpan.textContent = match[i];
+              fragment.appendChild(highlightSpan);
+            }
+          }
+
+          node.replaceWith(fragment);
+        }
+      } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT','STYLE','NOSCRIPT'].includes(node.tagName)) {
+        node.childNodes.forEach(child => highlightTextNodes(child));
+      }
+    }
+
+    highlightTextNodes(body);
+
+    // Show "No results" if nothing found
+    noResultsEl.style.display = matchFound ? 'none' : 'block';
+
+    // Scroll to first highlight
+    const firstHighlight = body.querySelector('span.search-highlight');
+    if (firstHighlight) firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  searchInput.addEventListener('input', highlightPage);
+  searchBtn.addEventListener('click', highlightPage);
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      highlightPage();
+    }
+  });
+});
+
+   // ---------------- SOS Function ----------------
+    function activateSOS() {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          alert(`🚨 SOS Activated!\nLatitude: ${position.coords.latitude}\nLongitude: ${position.coords.longitude}\nHelp is on the way!`);
+        });
+      } else {
+        alert("🚨 SOS Activated! Geolocation not supported.");
+      }
+    }
+
+    // ---------------- Safety Tips Carousel ----------------
+    const tips = [
+      "Stay aware of surroundings in public areas.",
+      "Share your location with trusted contacts.",
+      "Avoid isolated areas after dark.",
+      "Keep emergency numbers saved on your phone.",
+      "Trust your instincts and seek help if uncomfortable."
+    ];
+    let tipIndex = 0;
+    function nextTip() {
+      tipIndex = (tipIndex + 1) % tips.length;
+      document.getElementById('tip').innerText = tips[tipIndex];
+    }
+   
+  </script>
+</body>
+</html>

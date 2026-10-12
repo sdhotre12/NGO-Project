@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon 3D Volunteer Portal</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Three.js for 3D graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Load Firebase libraries -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // --- Global Firebase Setup ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+
+        if (Object.keys(firebaseConfig).length > 0) {
+            window.app = initializeApp(firebaseConfig);
+            window.db = getFirestore(window.app);
+            window.auth = getAuth(window.app);
+            setLogLevel('Debug');
+            
+            // Sign in process
+            const signInUser = async () => {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(window.auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(window.auth);
+                    }
+                    console.log("Firebase user signed in successfully.");
+                    window.userId = window.auth.currentUser?.uid || crypto.randomUUID();
+                    updateUserIdDisplay();
+                } catch (error) {
+                    console.error("Firebase Auth Error:", error);
+                }
+            };
+            signInUser();
+        } else {
+            console.warn("Firebase configuration not found. Form submissions will not be saved.");
+            window.db = null;
+            window.auth = null;
+            window.userId = crypto.randomUUID();
+            updateUserIdDisplay();
+        }
+
+        function updateUserIdDisplay() {
+            const userIdDisplay = document.getElementById('user-id-display');
+            if (userIdDisplay) {
+                userIdDisplay.textContent = window.userId || 'Guest';
+            }
+        }
+
+        window.submitForm = async function(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('volunteerForm');
+            const statusMessage = document.getElementById('status-message');
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            statusMessage.textContent = 'Processing transmission...';
+            statusMessage.classList.remove('hidden', 'text-green-400', 'text-red-400');
+            statusMessage.classList.add('text-yellow-400');
+            
+            // Final Data Structure
+            const finalData = {
+                fullName: data.fullName,
+                email: data.email,
+                phone: data.phone,
+                areaOfInterest: data.areaOfInterest,
+                commitment: data.commitment,
+                skills: data.skills,
+                timestamp: new Date().toISOString()
+            };
+
+            if (!window.db) {
+                console.error("Database not available. Data not saved.");
+                statusMessage.textContent = 'Submission success (offline mock). DB unavailable.';
+                statusMessage.classList.remove('text-yellow-400');
+                statusMessage.classList.add('text-green-400');
+                form.reset();
+                showStep(1); // Reset to first step
+                return;
+            }
+
+            try {
+                const userId = window.auth.currentUser?.uid || window.userId;
+                
+                // Firestore Path: /artifacts/{appId}/users/{userId}/volunteer_applications
+                const collectionPath = `artifacts/${appId}/users/${userId}/volunteer_applications`;
+                const volunteerRef = collection(window.db, collectionPath);
+                
+                await addDoc(volunteerRef, finalData);
+
+                statusMessage.textContent = 'Application Received! Welcome to the network.';
+                statusMessage.classList.remove('text-yellow-400', 'text-red-400');
+                statusMessage.classList.add('text-green-400');
+                form.reset();
+                showStep(1); // Reset to first step
+
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                statusMessage.textContent = 'Transmission Failure. Try again later.';
+                statusMessage.classList.remove('text-yellow-400', 'text-green-400');
+                statusMessage.classList.add('text-red-400');
+            }
+        }
+    </script>
+    <style>
+        /* Global & Reset */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden; 
+            height: 100vh;
+            background-color: #0b0213; /* Deep dark purple/black */
+        }
+
+        /* 3D Canvas Styling */
+        #three-canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Form Overlay Styling */
+        #form-container {
+            position: relative; 
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .form-card {
+            background-color: rgba(17, 24, 39, 0.95); /* Darker semi-transparent */
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            width: 550px;
+            min-height: 450px;
+            padding: 2rem;
+            border: 2px solid #a855f7; /* Purple-500 border */
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); /* Strong purple glow */
+            animation: glitchFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Glitchy/Cyber Animation for entry */
+        @keyframes glitchFadeIn {
+            0% { opacity: 0; transform: scale(0.9) translateY(20px); filter: hue-rotate(90deg);}
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: hue-rotate(0deg);}
+        }
+
+        /* Custom Input Styling */
+        .form-input {
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid #6b7280; /* Gray-500 */
+            color: #ffffff;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-input:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #f97316; /* Orange-500 for focus/activation */
+            box-shadow: 0 0 0 2px #f97316, inset 0 0 10px rgba(249, 115, 22, 0.5); 
+        }
+
+        /* Neon Button Style */
+        .neon-button {
+            background-color: #a855f7; /* Purple-500 */
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px #f472b6; /* Soft pink text shadow */
+        }
+
+        .neon-button:hover {
+            background-color: #db2777; /* Deep Pink */
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #db2777, 0 0 40px #f472b6; 
+        }
+
+        /* Tab Navigation Styles */
+        .step-indicator {
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+        .step-indicator.active {
+            border-bottom-color: #f97316; /* Orange-500 active line */
+            color: #f97316;
+            font-weight: bold;
+        }
+
+        /* Hide steps by default */
+        .form-step {
+            display: none;
+            padding-top: 1rem;
+        }
+        .form-step.active {
+            display: block;
+        }
+
+        .status-message {
+            border: 1px solid currentColor;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3D Canvas will be injected here by Three.js -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Form Overlay -->
+    <div id="form-container">
+        <div class="form-card rounded-2xl">
+            <h1 class="text-4xl font-extrabold text-white text-center mb-2" style="text-shadow: 0 0 10px #f472b6;">
+                VOLUNTEER INITIATION PROTOCOL
+            </h1>
+            <p class="text-pink-300/75 text-center mb-6 text-sm">
+                System online. Please complete the three-phase registration.
+            </p>
+
+            <!-- Status Message Area -->
+            <div id="status-message" class="hidden status-message p-3 rounded-xl font-mono text-sm text-center mb-4 transition-all duration-300"></div>
+
+            <!-- Step Navigation -->
+            <div class="flex justify-between border-b border-gray-700/50 mb-6">
+                <div id="tab-1" class="step-indicator active w-1/3 text-center py-2 text-white/70 hover:text-white" onclick="showStep(1)">
+                    <span class="mr-2">I.</span> Credentials
+                </div>
+                <div id="tab-2" class="step-indicator w-1/3 text-center py-2 text-white/70 hover:text-white" onclick="showStep(2)">
+                    <span class="mr-2">II.</span> Interest
+                </div>
+                <div id="tab-3" class="step-indicator w-1/3 text-center py-2 text-white/70 hover:text-white" onclick="showStep(3)">
+                    <span class="mr-2">III.</span> Finalize
+                </div>
+            </div>
+            
+            <form id="volunteerForm" onsubmit="window.submitForm(event)">
+                
+                <!-- Step 1: Personal Info -->
+                <div id="step-1" class="form-step active">
+                    <h2 class="text-xl text-pink-300 font-semibold mb-4">Phase I: Identity Verification</h2>
+                    
+                    <div class="mb-4">
+                        <label for="fullName" class="block text-sm font-medium text-white mb-1">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required
+                               class="form-input w-full p-3 rounded-lg font-mono"
+                               placeholder="[Your Designation]">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-white mb-1">Secure Email</label>
+                        <input type="email" id="email" name="email" required
+                               class="form-input w-full p-3 rounded-lg font-mono"
+                               placeholder="[Protocol Address]">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="phone" class="block text-sm font-medium text-white mb-1">Contact Signal</label>
+                        <input type="tel" id="phone" name="phone"
+                               class="form-input w-full p-3 rounded-lg font-mono"
+                               placeholder="+X-XXX-XXXX">
+                    </div>
+                    
+                    <button type="button" onclick="nextStep(1)"
+                            class="neon-button w-full text-white font-bold py-3 px-4 rounded-xl text-lg mt-4 shadow-lg">
+                        Next Phase: Connect >>
+                    </button>
+                </div>
+
+                <!-- Step 2: Interest & Skills -->
+                <div id="step-2" class="form-step">
+                    <h2 class="text-xl text-pink-300 font-semibold mb-4">Phase II: Target Vector Alignment</h2>
+
+                    <div class="mb-4">
+                        <label for="areaOfInterest" class="block text-sm font-medium text-white mb-1">Primary Interest</label>
+                        <select id="areaOfInterest" name="areaOfInterest" required
+                                class="form-input w-full p-3 rounded-lg appearance-none font-mono">
+                            <option value="" disabled selected>[Select Initiative]</option>
+                            <option value="Mentorship">Mentorship & Skill Uplink</option>
+                            <option value="DataAnalysis">Data Analysis & Reporting</option>
+                            <option value="Content">Content Creation & Comms</option>
+                            <option value="EventSupport">Event Logistics & Support</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="skills" class="block text-sm font-medium text-white mb-1">Key Skills (Optional)</label>
+                        <textarea id="skills" name="skills" rows="3"
+                              class="form-input w-full p-3 rounded-lg font-mono"
+                              placeholder="e.g., Python, Graphic Design, Public Speaking..."></textarea>
+                    </div>
+
+                    <div class="flex justify-between gap-4 mt-6">
+                        <button type="button" onclick="prevStep(2)"
+                                class="neon-button bg-gray-600 w-1/2 text-white/80 font-bold py-3 px-4 rounded-xl hover:bg-gray-700 hover:shadow-none">
+                            << Back
+                        </button>
+                        <button type="button" onclick="nextStep(2)"
+                                class="neon-button w-1/2 text-white font-bold py-3 px-4 rounded-xl shadow-lg">
+                            Next Phase: Commit >>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Commitment & Submission -->
+                <div id="step-3" class="form-step">
+                    <h2 class="text-xl text-pink-300 font-semibold mb-4">Phase III: Commitment Confirmation</h2>
+
+                    <div class="mb-6">
+                        <label for="commitment" class="block text-sm font-medium text-white mb-1">Weekly Time Commitment (Est.)</label>
+                        <select id="commitment" name="commitment" required
+                                class="form-input w-full p-3 rounded-lg appearance-none font-mono">
+                            <option value="" disabled selected>[Select Commitment Level]</option>
+                            <option value="Low">1-3 Hours (Light Support)</option>
+                            <option value="Medium">4-6 Hours (Regular Contributor)</option>
+                            <option value="High">7+ Hours (Core Team)</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-start mb-6">
+                        <input id="terms" name="terms" type="checkbox" required
+                               class="mt-1 h-4 w-4 bg-gray-700 border-gray-500 rounded text-purple-500 focus:ring-purple-500">
+                        <label for="terms" class="ml-3 text-sm text-white/90">
+                            I confirm the data is accurate and I am ready to join the mission.
+                        </label>
+                    </div>
+
+                    <div class="flex justify-between gap-4 mt-6">
+                        <button type="button" onclick="prevStep(3)"
+                                class="neon-button bg-gray-600 w-1/2 text-white/80 font-bold py-3 px-4 rounded-xl hover:bg-gray-700 hover:shadow-none">
+                            << Back
+                        </button>
+                        <button type="submit"
+                                class="neon-button w-1/2 text-white font-bold py-3 px-4 rounded-xl shadow-2xl focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50">
+                            EXECUTE SUBMISSION
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="mt-4 text-xs text-center text-white/50 font-mono">
+                System Identifier: <span id="user-id-display">Loading...</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // --- Multi-Step Form Logic ---
+        let currentStep = 1;
+
+        function showStep(step) {
+            // Hide all steps and deactivate all tabs
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.step-indicator').forEach(el => el.classList.remove('active'));
+
+            // Show current step and activate current tab
+            document.getElementById(`step-${step}`).classList.add('active');
+            document.getElementById(`tab-${step}`).classList.add('active');
+            currentStep = step;
+        }
+
+        function validateStep(step) {
+            const form = document.getElementById('volunteerForm');
+            const stepElement = document.getElementById(`step-${step}`);
+            let isValid = true;
+
+            // Simple validation check for required fields within the current step
+            stepElement.querySelectorAll('[required]').forEach(input => {
+                if (!input.value) {
+                    input.classList.add('border-red-500', 'ring-1', 'ring-red-500');
+                    isValid = false;
+                } else {
+                    input.classList.remove('border-red-500', 'ring-1', 'ring-red-500');
+                }
+            });
+
+            if (step === 3) {
+                const termsCheckbox = document.getElementById('terms');
+                if (!termsCheckbox.checked) {
+                    isValid = false;
+                    termsCheckbox.parentElement.classList.add('text-red-400');
+                } else {
+                    termsCheckbox.parentElement.classList.remove('text-red-400');
+                }
+            }
+
+            return isValid;
+        }
+
+        function nextStep(step) {
+            if (validateStep(step)) {
+                if (step < 3) {
+                    showStep(step + 1);
+                }
+            } else {
+                const statusMessage = document.getElementById('status-message');
+                statusMessage.textContent = 'Validation Error: Please fill all required fields in this phase.';
+                statusMessage.classList.remove('hidden', 'text-green-400', 'text-yellow-400');
+                statusMessage.classList.add('text-red-400');
+            }
+        }
+
+        function prevStep(step) {
+            if (step > 1) {
+                showStep(step - 1);
+            }
+        }
+
+        // --- Three.js Setup and Animation (Enhanced) ---
+        let scene, camera, renderer, dodecahedron;
+
+        function initThree() {
+            const container = document.getElementById('three-canvas');
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            // 1. Scene
+            scene = new THREE.Scene();
+            // Deep purple background (matches body)
+            scene.background = new THREE.Color(0x0b0213); 
+
+            // 2. Camera
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            camera.position.z = 2.5;
+
+            // 3. Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, canvas: container });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // 4. Lights (More dramatic neon lighting)
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+            scene.add(ambientLight);
+
+            // Strong point light for neon glow
+            const pointLightA = new THREE.PointLight(0xdb2777, 3, 100); // Pink light
+            pointLightA.position.set(3, 3, 3);
+            scene.add(pointLightA);
+
+            const pointLightB = new THREE.PointLight(0x6d28d9, 3, 100); // Deep Purple light
+            pointLightB.position.set(-3, -3, -3);
+            scene.add(pointLightB);
+
+            // 5. Geometry (Dodecahedron - more complex 12-sided shape)
+            const geometry = new THREE.DodecahedronGeometry(1.0, 0); 
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x8b5cf6, // Violet
+                emissive: 0x8b5cf6,
+                emissiveIntensity: 0.8,
+                shininess: 150,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.7
+            });
+            dodecahedron = new THREE.Mesh(geometry, material);
+            scene.add(dodecahedron);
+            
+            // 6. Particle System (The "network" background)
+            const particleGeometry = new THREE.BufferGeometry();
+            const particleCount = 1000;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const colorA = new THREE.Color(0xdb2777); // Pink
+            const colorB = new THREE.Color(0x6d28d9); // Purple
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 15;
+                positions[i + 1] = (Math.random() - 0.5) * 15;
+                positions[i + 2] = (Math.random() - 0.5) * 15;
+                
+                // Assign a mix of the two colors for variation
+                const color = new THREE.Color();
+                color.lerpColors(colorA, colorB, Math.random());
+                colors[i] = color.r;
+                colors[i + 1] = color.g;
+                colors[i + 2] = color.b;
+            }
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            const particles = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particles);
+
+            // 7. Event Listeners
+            window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('mousemove', onMouseMove, false);
+            document.addEventListener('touchmove', onTouchMove, false);
+            
+            animate();
+        }
+
+        let mouseX = 0, mouseY = 0;
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+
+        function onMouseMove(event) {
+            // Normalize mouse coordinates to -1 to 1
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            targetRotationY = mouseX * 0.7; // Increased sensitivity
+            targetRotationX = mouseY * 0.7;
+        }
+
+        function onTouchMove(event) {
+            if (event.touches.length > 0) {
+                const touch = event.touches[0];
+                mouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(touch.clientY / window.innerHeight) * 2 + 1;
+                targetRotationY = mouseX * 0.7;
+                targetRotationX = mouseY * 0.7;
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Gentle automatic rotation
+            dodecahedron.rotation.x += 0.003;
+            dodecahedron.rotation.y += 0.005;
+            
+            // User interaction: Interpolate rotation towards mouse/touch target
+            dodecahedron.rotation.y += (targetRotationY - dodecahedron.rotation.y) * 0.03;
+            dodecahedron.rotation.x += (targetRotationX - dodecahedron.rotation.x) * 0.03;
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Initial setup on load
+        window.onload = function () {
+            initThree();
+            showStep(1); // Initialize to the first step
+        }
+
+    </script>
+</body>
+</html>

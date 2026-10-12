@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Photo Gallery | Her Voice, Her Power</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- AOS Scroll Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+:root {
+  --primary: #0033a0;
+  --white: #ffffff;
+  --accent: #f5a623;
+  --light-bg: #f8f9ff;
+}
+*{ margin:0; padding:0; box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  background-color: var(--light-bg);
+  color: var(--primary);
+  overflow-x:hidden;
+}
+header{
+  background-image: url("photBcg2.png");
+  background-size: cover;
+  overflow: hidden; 
+  color: black;
+  text-align:center;
+  background-position: top;
+  height: fit-content;
+  padding :10px 8px;
+}
+header h1{ font-size:2.5rem; letter-spacing:1px;}
+
+  header h1 img {
+    height: 100px;
+    width: 100px;
+    vertical-align: middle;
+  }
+
+header p{ font-size:1.1rem;margin:0.2rem 0 3.5rem 0;}
+
+/* ===== Carousel Section ===== */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: transform 0.4s ease;
+}
+
+.carousel-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0,51,160,0.3);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.9);
+  color: black;
+  font-size: 2rem;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+.arrow:hover{ background: var(--primary); color: var(--white);}
+.left{ left: 15px;}
+.right{ right: 15px;}
+/* gallery section */
+    .gallery-section {
+      padding: 2rem 5%;
+    }
+
+    /* ✅ Fixed equal-size grid */
+   .gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.gallery-item {
+  flex: 1 1 280px;  /* Grow and shrink, base width 280px */
+  max-width: 300px;
+}
+    .gallery-item {
+      width: 100%;
+      max-width: 320px;
+      border:2px solid #eee;
+      border-radius: 9%;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); 
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    .gallery-item:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+    .thumb-wrap {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+    .thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+    .gallery-item:hover .thumb {
+      transform: scale(1.08);
+    }
+    .caption {
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+    }
+    .caption p {
+      color: #000;
+      margin: 0;
+      font-weight: 500;
+    }
+    .caption span {
+      font-size: 0.8rem;
+      background: rgba(0, 51, 160, 0.1);
+      color: black;
+      border-radius: 12px;
+      padding: 0.25rem 0.6rem;
+      font-weight: 600;
+    }
+    
+   .upload-icon {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+  
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .lightbox[aria-hidden="false"] {
+      display: flex;
+    }
+    .lightbox-dialog {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 90%;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+    .lightbox img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      background: #000;
+    }
+    #lb-caption{
+      color: #000;
+      font-size: 1rem;
+    }
+    .lightbox-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+    }
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      background-color:  #000000;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn.secondary {
+      background: #e7ebf9;
+      color: #000000;
+    }
+    .butnDiv{
+      display: flex;
+      gap: 15px;
+    }
+footer{
+  background-color: #0033a0;
+  color: white;
+  text-align:center;
+  padding:15px 0;
+  font-size:0.9rem;
+  margin-top:40px;
+}
+@media(max-width:768px){
+  .carousel-item{ height:350px; }
+  .thumb{ height:180px; }
+}
+ .upload-icon {
+    width: 90%;
+    height: 100%;
+    cursor: pointer;
+    /* text-align: center;
+    align-items: center; */
+  }
+
+  .caption {
+    padding: 10px;
+    background: #f5f5f5;
+  }
+
+  .caption p {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .caption span {
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+</style>
+</head>
+<body>
+<header data-aos="fade-down">
+  <h1><img src="../logo.png" alt="logo" data-aos="zoom-in-down">Photo Gallery</h1>
+  <p data-aos="fade-up"><b>Empowering Women, Capturing Every Moment</b></p>
+</header>
+<!-- ===== Carousel ===== -->
+<div class="carousel-wrapper" data-aos="fade-up">
+  <button class="arrow left" id="prev">&#10094;</button>
+  <div class="carousel-container" id="carousel">
+    <img src="eventCars1.png" class="carousel-item" alt="Event 1">
+    <img src="eventCars2.png" class="carousel-item" alt="Event 2">
+    <img src="eventCars3.png" class="carousel-item" alt="Event 3">
+    <img src="eventCars4.png" class="carousel-item" alt="Event 4">
+  </div>
+  <button class="arrow right" id="next">&#10095;</button>
+</div>
+ <main class="gallery-section">
+    <div class="gallery-grid" id="gallery">
+      <!-- ✅ Only 6 uniform cards -->
+      <figure class="gallery-item reveal" tabindex="0" data-full="images/gallery-02.jpg" data-caption="Mentorship circle supporting education and leadership.
+      Providing safe and supportive mentoring circles for girls to discuss challenges, build confidence, and plan their futures." data-aos="zoom-in" data-aos-delay="100">
+        <div class="thumb-wrap">
+          <img class="thumb" src="photoGall1.webp" alt="Mentorship Circle" />
+        </div>
+        <figcaption class="caption">
+          <p>Mentorship Circle</p><span>Education</span>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item reveal" tabindex="0" data-full="images/gallery-03.jpg" data-caption="School outreach—empowering young voices.
+      Empowering young women with essential physical safety techniques and boosting their self-reliance and awareness." data-aos="zoom-in" data-aos-delay="200">
+        <div class="thumb-wrap">
+          <img class="thumb" src="photoGall2.jpeg" alt="School Outreach" />
+        </div>
+        <figcaption class="caption">
+          <p>School Outreach</p><span>Outreach</span>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item reveal" tabindex="0" data-full="images/gallery-04.jpg" data-caption="Community awareness event with volunteers.
+      Engaging local communities and parents to raise awareness about girls' welfare, rights, and security needs." data-aos="zoom-in" data-aos-delay="200">
+        <div class="thumb-wrap">
+          <img class="thumb" src="photoGall4.jpg" alt="Community Awareness" />
+        </div>
+        <figcaption class="caption">
+          <p>Community Awareness</p><span>Event</span>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item reveal" tabindex="0" data-full="images/gallery-05.jpg" data-caption="Career guidance and skills workshop for young women.
+      Professional guidance and skills training sessions preparing young women for job market success and financial independence." data-aos="zoom-in" data-aos-delay="300">
+        <div class="thumb-wrap">
+          <img class="thumb" src="photoGall3.png" alt="Career Guidance" />
+        </div>
+        <figcaption class="caption">
+          <p>Career Guidance</p><span>Workshop</span>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item reveal" tabindex="0" data-full="images/gallery-06.jpg" data-caption="Health and hygiene awareness drive in local schools.
+      Educational sessions covering physical, mental, and reproductive health, fostering overall well-being and self-care." data-aos="zoom-in" data-aos-delay="400">
+        <div class="thumb-wrap">
+          <img class="thumb" src="photoGall5.jpg" alt="Health & Hygiene" />
+        </div>
+        <figcaption class="caption">
+          <p>Health & Hygiene</p><span>Awareness</span>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item reveal" tabindex="0" data-full="images/gallery-07.jpg" data-caption="Leadership training — building confidence and voice.
+      Intensive training programs designed to build confidence, assertiveness, and strong public speaking and leadership qualities." data-aos="zoom-in" data-aos-delay="500">
+        <div class="thumb-wrap">
+          <img class="thumb" src="photoGall6.webp" alt="Leadership Training" />
+        </div>
+        <figcaption class="caption">
+          <p>Leadership Training</p><span>Skill</span>
+        </figcaption>
+      </figure>
+      <figure class="gallery-item reveal" tabindex="0" data-full="" data-caption="Upcoming Event:Annual Safety Summit->
+        Join us for our 3rd Annual Girls' Safety & Welfare Summit in November. Stay tuned for details!" data-aos="zoom-in" data-aos-delay="600"> 
+  <div class="thumb-wrap">
+    <!-- <img class="thumb" src="" alt="next event" /> -->
+    <img src="uploPhoto.png" class="upload-icon" id="uploadIcon" alt="upload" />
+    <input type="file" id="fileInput" accept="image/*">
+  </div>
+  <figcaption class="caption">
+    <p>Event Name</p><span>Null</span>
+  </figcaption>
+</figure>
+</div>
+    </div>
+  </main>
+  <!-- ✅ Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-dialog">
+      <img id="lb-image" src="" alt="" />
+      <div class="lightbox-footer">
+        <p id="lb-caption"></p>
+        <div class="butnDiv">
+          <button class="btn secondary" id="prevBtn">← Prev</button>
+          <button class="btn secondary" id="nextBtn">Next →</button>
+          <button class="btn" id="closeBtn">Close ✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<footer>
+  © <span id="year"></span> Her Voice, Her Power — All Rights Reserved.
+</footer>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ duration:1000, once:true });
+// Carousel functionality
+const carousel = document.getElementById('carousel');
+const images = document.querySelectorAll('.carousel-item');
+let index = 0;
+document.getElementById('next').addEventListener('click',()=>{
+  index = (index+1)%images.length;
+  carousel.style.transform=`translateX(-${index*100}%)`;
+});
+document.getElementById('prev').addEventListener('click',()=>{
+  index = (index-1+images.length)%images.length;
+  carousel.style.transform=`translateX(-${index*100}%)`;
+});
+setInterval(()=>{
+  index = (index+1)%images.length;
+  carousel.style.transform=`translateX(-${index*100}%)`;
+},4000);
+ // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    });
+    revealEls.forEach((el) => io.observe(el));
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox');
+    const lbImage = document.getElementById('lb-image');
+    const lbCaption = document.getElementById('lb-caption');
+    const closeBtn = document.getElementById('closeBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const items = Array.from(document.querySelectorAll('.gallery-item'));
+    let inde = 0;
+    function openLightbox(i) {
+      inde = i;
+      const el = items[i];
+      lbImage.src = el.dataset.full;
+      lbCaption.textContent = el.dataset.caption;
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+    function closeLightbox() {
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+    function nextImage() {
+      inde = (inde + 1) % items.length;
+      openLightbox(inde);
+    }
+    function prevImage() {
+      inde = (inde - 1 + items.length) % items.length;
+      openLightbox(inde);
+    }
+    items.forEach((el, i) => el.addEventListener('click', () => openLightbox(i)));
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', nextImage);
+    prevBtn.addEventListener('click', prevImage);
+    //upload photos and images
+     const fileInput = document.getElementById('fileInput');
+  const uploadIcon = document.getElementById('uploadIcon');
+  const thumb = document.querySelector('.thumb');
+
+  // Click on the "+" icon triggers file input
+  uploadIcon.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  // When a file is selected, update the card image
+  fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        thumb.src = e.target.result; // show image in card
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

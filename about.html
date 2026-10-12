@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Women's Safety</title>
+
+  <!-- AOS Scroll Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --main-bg: linear-gradient(to right, #e6f0ff, #ffffff);
+      --main-color: #0a4dad;
+      --accent-color: #007bff;
+      --card-bg: white;
+      --text-color: #222;
+      --footer-bg: #0a4dad;
+    }
+
+    body.dark {
+      --main-bg: linear-gradient(to right, #1b1b2f, #162447);
+      --main-color: #00c6ff;
+      --accent-color: #0ef;
+      --card-bg: #1f2937;
+      --text-color: #f0f0f0;
+      --footer-bg: #000;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--main-bg);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    /* Header with Video */
+    header {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    header video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.4);
+    }
+
+    header h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+    }
+
+    header p {
+      font-size: 1.3em;
+      font-weight: 500;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--main-color);
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    p, li {
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+
+    .icon {
+      width: 28px;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+
+    /* Team Section */
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .card img {
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 3px solid var(--accent-color);
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 1.2em;
+      color: var(--main-color);
+    }
+
+    .card p {
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--footer-bg);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      margin-top: 40px;
+    }
+
+    /* Dark Mode Button */
+    .dark-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      z-index: 999;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .dark-toggle:hover {
+      background: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2em; }
+      header p { font-size: 1em; }
+      .team { flex-direction: column; align-items: center; }
+      .dark-toggle { padding: 8px 14px; top: 10px; right: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark Mode Button -->
+  <button class="dark-toggle" onclick="toggleDark()">🌙 Dark Mode</button>
+
+  <!-- Header -->
+  <header>
+    <video autoplay muted loop>
+      <source src="https://cdn.coverr.co/videos/coverr-woman-walking-in-the-city-1567/1080p.mp4" type="video/mp4">
+    </video>
+    <div>
+      <h1>About Us</h1>
+      <p>Empowering Women Through Technology & Safety</p>
+    </div>
+  </header>
+
+  <!-- Mission -->
+  <section data-aos="fade-up">
+    <h2>Our Mission <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" class="icon" /></h2>
+    <p>Our mission is to create a secure, supportive, and empowering environment for women by leveraging technology, awareness, and community engagement. We aim to provide real-time emergency support, location sharing with trusted contacts, and verified resources. We also encourage anonymous reporting and provide access to self-defense and awareness resources to help women feel confident, safe, and heard.</p>
+  </section>
+
+  <!-- Why We Need -->
+  <section data-aos="fade-left">
+    <h2>Why We Need This Website? <img src="https://cdn-icons-png.flaticon.com/512/1828/1828940.png" class="icon" /></h2>
+    <p>Women face challenges such as harassment, stalking, and unsafe spaces. Our website bridges the gap by offering an accessible platform for emergency support, reporting, and learning. It empowers women with quick tools, community support, and reliable resources to enhance safety and confidence.</p>
+  </section>
+
+  <!-- Team -->
+  <section data-aos="fade-up">
+    <h2>Our Team <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" class="icon" /></h2>
+    <div class="team">
+      <div class="card" data-aos="zoom-in">
+        <img src="https://via.placeholder.com/90" alt="Aishwarya">
+        <h3>Aishwarya</h3>
+        <p>Founder</p>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://via.placeholder.com/90" alt="Shivanjali">
+        <h3>Shivanjali</h3>
+        <p>Developer</p>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://via.placeholder.com/90" alt="Asmita">
+        <h3>Asmita</h3>
+        <p>Manager</p>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="300">
+        <img src="https://via.placeholder.com/90" alt="Saniya">
+        <h3>Saniya</h3>
+        <p>Research Lead</p>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="400">
+        <img src="https://via.placeholder.com/90" alt="Pranali">
+        <h3>Pranali</h3>
+        <p>Designer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Offer -->
+  <section data-aos="fade-up">
+    <h2>What We Offer <img src="https://cdn-icons-png.flaticon.com/512/1828/1828970.png" class="icon" /></h2>
+    <ul>
+      <li>🆘 Emergency Contact Button</li>
+      <li>📍 Location Sharing</li>
+      <li>🛡️ Self-Defense Blogs & Resources</li>
+      <li>📚 Safety News & Campaigns</li>
+      <li>💬 Anonymous Reporting</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Women's Safety Project | Designed with ❤️ by Team SecureHer
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+
+</body>
+</html>

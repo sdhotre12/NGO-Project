@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NCW — Annual Reports</title>
+
+  <!-- Google Font & AOS Library -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f3f6ff, #dbeafe);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 15px;
+      background: linear-gradient(90deg, #eef2ff, #e4e9ee);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-left img {
+      height: 90px;
+      margin-right: 10px;
+      transition: transform 0.5s ease;
+    }
+
+    .header-left img:hover {
+      transform: rotate(5deg) scale(1.05);
+    }
+
+    .header-title .lang {
+      font-size: 18px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .header-title .eng {
+      font-size: 22px;
+      font-weight: bold;
+      color: #0077ff;
+    }
+
+    /* Hero Banner */
+    .page-banner {
+      background: linear-gradient(rgba(0, 40, 100, 0.7), rgba(0, 40, 100, 0.6)), url('background.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-banner::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.2), transparent 70%);
+      animation: pulse 6s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .page-banner h1 {
+      font-size: 42px;
+      font-weight: 700;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      background: white;
+      margin: -40px auto 40px auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      padding: 40px;
+      position: relative;
+      z-index: 4;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0077ff;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p.desc {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    select, button {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #0077ff;
+      font-size: 1rem;
+      background: white;
+      transition: all 0.3s;
+    }
+
+    select:hover, button:hover {
+      background: #0077ff;
+      color: white;
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    th {
+      background: #0077ff;
+      color: white;
+      padding: 12px;
+    }
+
+    td {
+      border-bottom: 1px solid #ddd;
+      padding: 15px;
+    }
+
+    tr:hover {
+      background: #eef6ff;
+      transition: 0.3s;
+    }
+
+    a {
+      color: #0077ff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #0053cc;
+    }
+
+    footer {
+      background: linear-gradient(90deg, #0077ff, #6028e3);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .filters {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      select, button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header data-aos="fade-down">
+    <div class="header-left">
+      <img src="logo.png" alt="NCW Logo">
+      <div class="header-title">
+        <div class="lang">अ-शासकीय संस्था</div>
+        <div class="eng">Non-Governmental Organization</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div class="page-banner" data-aos="zoom-in">
+    <h1 data-aos="fade-up" data-aos-delay="200">Annual Reports</h1>
+  </div>
+
+  <!-- Report Section -->
+  <div class="container" data-aos="fade-up">
+    <h2 data-aos="fade-right">Annual Reports 📊</h2>
+    <p class="desc" data-aos="fade-left" data-aos-delay="150">
+      Transparency, impact, and financial summary across the years.
+    </p>
+
+    <div class="filters" data-aos="zoom-in">
+      <div>
+        <label>1. Year</label><br>
+        <select id="yearSelect">
+          <option value="all">All</option>
+          <option value="2023–2024">2023–2024</option>
+          <option value="2022–2023">2022–2023</option>
+          <option value="2021–2022">2021–2022</option>
+          <option value="2020–2021">2020–2021</option>
+          <option value="2019–2020">2019–2020</option>
+          <option value="2018–2019">2018–2019</option>
+          <option value="2017–2018">2017–2018</option>
+          <option value="2016–2017">2016–2017</option>
+          <option value="2015–2016">2015–2016</option>
+        </select>
+      </div>
+      <div>
+        <label>2. Language</label><br>
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="mr">Marathi</option>
+        </select>
+      </div>
+      <div>
+        <button id="resetBtn">Reset Filters</button>
+      </div>
+    </div>
+
+    <table data-aos="fade-up" data-aos-delay="200">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Year</th>
+          <th>Language</th>
+          <th>Report Title</th>
+        </tr>
+      </thead>
+      <tbody id="reportTable"></tbody>
+    </table>
+  </div>
+
+  <footer data-aos="fade-up">
+    2025 Women's Safety Project | Designed with ❤ by Team SecureHer
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200,
+      once: true,
+      easing: 'ease-in-out'
+    });
+
+    const reports = [
+      { year: "2023–2024", lang: "en", title: "Annual Report 2023–2024", link:'2023-24.html' },
+      { year: "2022–2023", lang: "en", title: "Annual Report 2022–2023", link: "2022-23.html" },
+      { year: "2021–2022", lang: "en", title: "Annual Report 2021–2022", link: "2021-22.html" },
+      { year: "2020–2021", lang: "en", title: "Annual Report 2020–2021", link: "2020-21.html" },
+      { year: "2019–2020", lang: "en", title: "Annual Report 2019–2020", link: "2019-20.html" },
+      { year: "2018–2019", lang: "en", title: "Annual Report 2018–2019", link: "2018-19.html" },
+      { year: "2017–2018", lang: "en", title: "Annual Report 2017–2018", link: "2017-18.html" },
+      { year: "2016–2017", lang: "en", title: "Annual Report 2016–2017", link: "2016-17.html" },
+      { year: "2015–2016", lang: "en", title: "Annual Report 2015–2016", link: "2015-16.html" },
+
+      // Hindi Reports
+      { year: "2023–2024", lang: "hi", title: "वार्षिक रिपोर्ट 2023–2024", link: "2023-24h.html" },
+      { year: "2022–2023", lang: "hi", title: "वार्षिक रिपोर्ट 2022–2023", link: "2022-2023.html" },
+      { year: "2021–2022", lang: "hi", title: "वार्षिक रिपोर्ट 2021–2022", link: "2021-2022.html" },
+      { year: "2020–2021", lang: "hi", title: "वार्षिक रिपोर्ट 2020–2021", link: "2020-2021.html" },
+      { year: "2019–2020", lang: "hi", title: "वार्षिक रिपोर्ट 2019–2020", link: "2019-2020.html" },
+      { year: "2018–2019", lang: "hi", title: "वार्षिक रिपोर्ट 2018–2019", link: "2018-2019.html" },
+  { year: "2017–2018", lang: "hi", title: "वार्षिक रिपोर्ट 2017–2018", link: "2017-2018.html" },
+  { year: "2016–2017", lang: "hi", title: "वार्षिक रिपोर्ट 2016–2017", link: "2016-2017.html" },
+  { year: "2015–2016", lang: "hi", title: "वार्षिक रिपोर्ट 2015–2016", link: "2015-2016.html" },
+
+
+      // Marathi Reports
+      { year: "2023–2024", lang: "mr", title: "वार्षिक अहवाल 2023–2024", link: "2023-24m.html" },
+      { year: "2022–2023", lang: "mr", title: "वार्षिक अहवाल 2022–2023", link: "2022-23m.html" },
+      { year: "2021–2022", lang: "mr", title: "वार्षिक अहवाल 2021–2022", link: "2021-22m.html" },
+      { year: "2020–2021", lang: "mr", title: "वार्षिक अहवाल 2020–2021", link: "2020-21m.html" },
+      { year: "2019–2020", lang: "mr", title: "वार्षिक अहवाल 2019–2020", link: "2019-20m.html" },
+       { year: "2018–2019", lang: "mr", title: "वार्षिक अहवाल 2018–2019", link: "2018-19m.html" },
+  { year: "2017–2018", lang: "mr", title: "वार्षिक अहवाल 2017–2018", link: "2017-18m.html" },
+  { year: "2016–2017", lang: "mr", title: "वार्षिक अहवाल 2016–2017", link: "2016-17m.html" },
+  
+  { year: "2015–2016", lang: "mr", title: "वार्षिक अहवाल 2015–2016", link: "2015-16m.html"}
+    ];
+
+    const yearSelect = document.getElementById("yearSelect");
+    const langSelect = document.getElementById("langSelect");
+    const reportTable = document.getElementById("reportTable");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function renderTable() {
+      const selectedYear = yearSelect.value;
+      const selectedLang = langSelect.value;
+      const filtered = reports.filter(r =>
+        (selectedYear === "all" || r.year === selectedYear) &&
+        r.lang === selectedLang
+      );
+
+      reportTable.innerHTML = "";
+      filtered.forEach((r, i) => {
+        const row = `<tr data-aos="fade-up" data-aos-delay="${100 * i}">
+          <td>${i + 1}</td>
+          <td>${r.year}</td>
+          <td>${r.lang === "en" ? "English" : r.lang === "hi" ? "Hindi" : "Marathi"}</td>
+          <td><a href="${r.link}" target="_blank">${r.title}</a></td>
+        </tr>`;
+        reportTable.innerHTML += row;
+      });
+    }
+
+    yearSelect.addEventListener("change", renderTable);
+    langSelect.addEventListener("change", renderTable);
+    resetBtn.addEventListener("click", () => {
+      yearSelect.value = "all";
+      langSelect.value = "en";
+      renderTable();
+    });
+
+    renderTable();
+  </script>
+</body>
+</html>

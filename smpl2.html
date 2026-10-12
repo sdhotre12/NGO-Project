@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Her Voice, Her Power | Girls Safety NGO</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <!-- AOS Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --main-bg: linear-gradient(to right, #d0b3ff, #cce0ff);
+      --main-color: #1E3A8A;
+      --accent-color: #ff4b5c;
+      --text-dark: #222;
+      --text-light: #fff;
+      --card-bg: #fff;
+      --footer-bg: #111;
+    }
+
+    body.dark {
+      --main-bg: linear-gradient(to right, #1e1e2f, #2c3e50);
+      --main-color: #00c6ff;
+      --accent-color: #ff758c;
+      --text-dark: #f5f5f5;
+      --card-bg: #2a2a3c;
+      --footer-bg: #000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--main-bg);
+      color: var(--text-dark);
+      transition: all 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ------------------ Dark Mode Toggle ------------------ */
+    .dark-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--main-color);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+    .dark-toggle:hover { background: #444; }
+
+    /* ------------------ Header ------------------ */
+    header {
+      background: var(--main-color);
+      color: var(--text-light);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    header .container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    header h1 img {
+      height: 55px;
+      width: 55px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      font-weight: 500;
+      color: #f5f5f5;
+      transition: 0.3s;
+    }
+    nav a:hover { color: #ffe600; }
+
+    /* ------------------ Hero ------------------ */
+    .hero {
+      position: relative;
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+      z-index: -1;
+    }
+    .hero-content {
+      max-width: 750px;
+      z-index: 10;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content h1 {
+      font-size: 46px;
+      margin-bottom: 15px;
+    }
+    .hero-content h1 span { color: var(--accent-color); }
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+    .hero-buttons a {
+      padding: 14px 28px;
+      margin: 0 10px;
+      border-radius: 30px;
+      font-weight: 600;
+      background: var(--accent-color);
+      color: white;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .hero-buttons a:hover { background: #e63e4a; }
+
+    /* ------------------ Services ------------------ */
+    .services {
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .services h2 {
+      font-size: 34px;
+      color: var(--main-color);
+      margin-bottom: 50px;
+    }
+    .service-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .card {
+      background: var(--card-bg);
+      width: 280px;
+      border-radius: 16px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .card h3 {
+      color: var(--main-color);
+      margin-bottom: 15px;
+    }
+    .card p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+    .card a {
+      display: inline-block;
+      padding: 10px 22px;
+      background: var(--main-color);
+      color: white;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .card a:hover { background: #2563EB; }
+    /* ------------------ Quick Panel ------------------ */
+    .quick-panel {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 60px 0;
+      background: #f9fbff;
+    }
+
+    .quick-card {
+      background: white;
+      width: 240px;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .quick-card h4 {
+      margin-bottom: 15px;
+      color: #1E3A8A;
+    }
+
+    .quick-card p {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .quick-card button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #2563EB;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .quick-card button:hover {
+      background: #e58ce7;
+    }
+    /* ------------------ Footer ------------------ */
+    footer {
+      background: var(--footer-bg);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .service-cards { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark Mode Toggle -->
+  <button class="dark-toggle" onclick="toggleDark()">🌙 Dark Mode</button>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1><img src="logo.png"> Her Voice, Her Power</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="about3.html">About Us</a>
+        <a href="sos.html">SOS</a>
+        <a href="map.html">Safe Zones</a>
+        <a href="sdg.html">Self Defence</a>
+        <a href="login.html">Login</a>
+        <a href="feedback.html">Feedback</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <video autoplay muted loop>
+      <source src="homeVideo.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Your <span>Safety</span> is <span>Our Voice</span></h1>
+      <p>Empowering girls with real-time safety tools, helplines, and awareness resources.</p>
+      <div class="hero-buttons">
+        <a href="sos.html"><i class="fa-solid fa-triangle-exclamation"></i> SOS</a>
+        <a href="report.html"><i class="fa-solid fa-file-shield"></i> Report</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" data-aos="fade-up">
+    <h2>What We Offer</h2>
+    <div class="service-cards">
+      <div class="card" data-aos="zoom-in">
+        <h3><i class="fa-solid fa-location-dot"></i> Safe Zones Map</h3>
+        <p>Locate nearby safe places, police stations, hospitals, and NGOs instantly.</p>
+        <a href="map.html">View Map</a>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <h3><i class="fa-solid fa-phone"></i> Helplines</h3>
+        <p>Access emergency numbers, legal aid, counseling, and guidance.</p>
+        <a href="resources.html">View</a>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="200">
+        <h3><i class="fa-solid fa-book"></i> Self-Defense</h3>
+        <p>Guides, safety tips, tutorials, and inspiring stories.</p>
+        <a href="articles.html">Read</a>
+      </div>
+    </div>
+  </section>
+   <!-- Quick Panel -->
+  <section class="quick-panel">
+    <!-- <div class="quick-card">
+      <h4><i class="fa-solid fa-tower-broadcast" style="color: #ff0000;"></i>SOS</h4>
+      <p>Activate SOS and send your location</p>
+      <button onclick="window.location.href='sos.html'">Send SOS</button>
+    </div> -->
+    <div class="quick-card">
+      <h4><i class="fa-solid fa-phone-volume" style="color: #000000;"></i>Emergency Helpline</h4>
+      <p>Call 1091 for women safety</p>
+      <button onclick="window.location.href='tel:1091'">Call Now</button>
+    </div>
+    <div class="quick-card">
+      <h4><i class="fa-solid fa-user-shield" style="color: #1a4d1a;"></i>Safety Tip</h4>
+      <p id="tip">Stay aware of surroundings in public areas.</p>
+      <button onclick="nextTip()">Next Tip</button>
+    </div>
+    <div class="quick-card">
+      <h4><i class="fa-solid fa-user" style="color: #f46201;"></i>User Profile</h4>
+      <p>Trusted contacts & saved reports</p>
+      <button onclick="window.location.href='profile.html'">Go to Profile</button>
+    </div>
+    <div class="quick-card">
+      <h4>Admin Dashboard</h4>
+      <p>View reports & NGO analytics</p>
+      <button onclick="window.location.href='admin.html'">Open Dashboard</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Her Voice, Her Power NGO | All Rights Reserved</p>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>

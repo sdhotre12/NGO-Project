@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile Page</title>
+  <link rel="stylesheet" href="sec.css" />
+  <style>
+    body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #ffe6f2;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 22%;
+  background-color: #fff;
+  padding: 40px 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  color: #66c2ff;
+  font-weight: 500;
+  margin: 20px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar li:hover {
+  color: #66c2ff;
+}
+
+/* Profile Section */
+.profile-section {
+  flex: 1;
+  position: relative;
+}
+
+.cover-photo {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to right, #66c2ff, #ffe6f2);
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.profile-card {
+  background-color: #fff;
+  width: 60%;
+  margin: -80px auto 0;
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+}
+
+/* Profile Image */
+.image-container {
+  position: relative;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  margin-top: -60px;
+  object-fit: cover;
+}
+
+.change-pic-btn {
+  display: none;
+  background-color: #66c2ff;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.change-pic-btn:hover {
+  background-color: #66c2ff;
+}
+
+/* Buttons */
+.edit-btn,
+.save-btn {
+  background-color: #66c2ff;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover,
+.save-btn:hover {
+  background-color: #66c2ff;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Form Fields */
+form {
+  margin-top: 25px;
+  text-align: left;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+form input:focus {
+  border-color: #66c2ff;
+  outline: none;
+  box-shadow: 0 0 5px #66c2ff;
+}
+
+/* Footer */
+.app-info {
+  color: gray;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.app-name {
+  color: #66c2ff;
+  font-weight: 700;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <div class="cover-photo"></div>
+
+      <div class="profile-card">
+        <!-- Profile Image -->
+        <div class="image-container">
+          <img
+            id="profileImage"
+            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"
+            alt="Profile"
+            class="profile-pic"
+          />
+          <input type="file" id="uploadImage" accept="image/*" hidden />
+          <button id="changePicBtn" class="change-pic-btn">Change Photo</button>
+        </div>
+
+        <h2 id="displayName">Asmita sargar </h2>
+        <p id="displayProfession" class="profession">Engineer</p>
+
+        <!-- Edit Button -->
+        <button id="editBtn" class="edit-btn">Edit Profile</button>
+
+        <!-- Profile Details -->
+        <form id="profileForm">
+          <label>Name:</label>
+          <input type="text" id="name" value="Asmita sargar" disabled />
+
+          <label>Age:</label>
+          <input type="number" id="age" value="20" disabled />
+
+          <label>Profession:</label>
+          <input type="text" id="profession" value="Engineer" disabled />
+
+          <label>City:</label>
+          <input type="text" id="city" value="kolhapur" disabled />
+
+          <label>Country:</label>
+          <input type="text" id="country" value="India" disabled />
+
+          <button type="button" id="saveBtn" class="save-btn hidden">Save</button>
+        </form>
+
+        <footer>2025 Women's Safety Project | Designed with ❤ by Team SecureHer</footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ======== Select elements =========
+    const editBtn = document.getElementById("editBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const inputs = document.querySelectorAll("#profileForm input");
+    const displayName = document.getElementById("displayName");
+    const displayProfession = document.getElementById("displayProfession");
+
+    const changePicBtn = document.getElementById("changePicBtn");
+    const uploadImage = document.getElementById("uploadImage");
+    const profileImage = document.getElementById("profileImage");
+
+    // ======== Edit button logic =========
+    editBtn.addEventListener("click", () => {
+      inputs.forEach((input) => (input.disabled = false));
+      editBtn.classList.add("hidden");
+      saveBtn.classList.remove("hidden");
+      changePicBtn.style.display = "block";
+    });
+
+    // ======== Save button logic =========
+    saveBtn.addEventListener("click", () => {
+      inputs.forEach((input) => (input.disabled = true));
+      editBtn.classList.remove("hidden");
+      saveBtn.classList.add("hidden");
+      changePicBtn.style.display = "none";
+
+      // Update profile display
+      displayName.textContent = document.getElementById("name").value;
+      displayProfession.textContent =
+        document.getElementById("profession").value;
+    });
+
+    // ======== Change profile image =========
+    changePicBtn.addEventListener("click", () => {
+      uploadImage.click();
+    });
+
+    uploadImage.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          profileImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
+

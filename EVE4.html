@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girls Welfare Upcoming Events</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #020617 0%, #000814 100%);
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 32px;
+    background: linear-gradient(90deg, #ff4ad8, #a55bff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 30px;
+  }
+
+  .carousel {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    transform-style: preserve-3d;
+    animation: rotate 18s infinite linear;
+  }
+
+  .carousel:hover {
+    animation-play-state: paused;
+  }
+
+  .card {
+    position: absolute;
+    width: 260px;
+    height: 160px;
+    left: 70px;
+    top: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(255, 50, 200, 0.4);
+    transition: transform 0.5s;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card .label {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 6px 0;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .carousel .card:nth-child(1) { transform: rotateY(0deg) translateZ(380px); }
+  .carousel .card:nth-child(2) { transform: rotateY(72deg) translateZ(380px); }
+  .carousel .card:nth-child(3) { transform: rotateY(144deg) translateZ(380px); }
+  .carousel .card:nth-child(4) { transform: rotateY(216deg) translateZ(380px); }
+  .carousel .card:nth-child(5) { transform: rotateY(288deg) translateZ(380px); }
+
+  @keyframes rotate {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+
+  .info {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #ddd;
+    opacity: 0.9;
+  }
+
+  .neon-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(255, 0, 200, 0.4),
+                0 0 50px rgba(120, 0, 255, 0.3);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>o
+
+  <h1>Girls Welfare Upcoming Events</h1>
+  <p>Click or tap on rotating event cards to view details!</p>
+
+  <div class="carousel" id="carousel">
+    <div class="card">
+      <img src="MP5.jpg" alt="STEM Skill Workshop">
+            <div class="nen-glow"></div>
+      <div class="label">STEM Skill Workshop</div>
+    </div>
+    <div class="card">
+      <img src="MP3.jpg" alt="Basic Self-Defence Training">
+      <div class="neon-glow"></div>
+      <div class="label">Basic Self-Defence Training</div>
+    </div>
+    <div class="card">
+      <img src="MP2.jpg" alt="Mental Health Awareness Day">
+      <div class="neon-glow"></div>
+      <div class="label">Mental Health Awareness Day</div>
+    </div>
+    <div class="card">
+      <img src="MP1.jpg" alt="Creative Self-Defense Training">
+      <div class="neon-glow"></div>
+      <div class="label">Creative Self-Defence Training</div>
+    </div>
+    <div class="card">
+      <img src="MP4.jpg" alt="STEM Skill Workshop">
+      <div class="neon-glow"></div>
+      <div class="label">STEM Skill Workshop</div>
+    </div>
+  </div>
+
+  <div class="info">
+    Hovering over: <b>STEM Workshop</b>. Click/Tap to see details!
+  </div>
+
+<script>
+  const carousel = document.getElementById("carousel");
+  let isDragging = false;
+  let startX;
+  let rotateY = 0;
+
+  carousel.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    carousel.style.animationPlayState = "paused";
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    carousel.style.animationPlayState = "running";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    rotateY += dx * 0.3;
+    carousel.style.transform = `rotateY(${rotateY}deg)`;
+    startX = e.clientX;
+  });
+</script>
+
+</body>
+</html>

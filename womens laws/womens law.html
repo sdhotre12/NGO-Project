@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laws Related to Women </title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0a2a43, #144b77);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    h1 {
+      margin-top: 40px;
+      text-align: center;
+      letter-spacing: 1px;
+      font-size: 2.3em;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    p {
+      text-align: center;
+      color: #22292c;
+      margin-bottom: 40px;
+      font-size: 1em;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      perspective: 1000px;
+      padding: 20px;
+      max-width: 1100px;
+    }
+
+    .card {
+      width: 280px;
+      height: 230px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      backface-visibility: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+
+    .front {
+      background: linear-gradient(135deg, #fe898d, #ef1438);
+    }
+
+    .back {
+      background: linear-gradient(135deg, #76bdfb, #00f2fe);
+      transform: rotateY(180deg);
+      color: #100e0e;
+      font-size: 0.9em;
+      overflow-y: auto;
+    }
+
+    .front h2 {
+      color: rgb(11, 11, 11);
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+
+    .back a {
+      color: #0c0b0b;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #c1e4f0;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+      background-color: rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📜 Laws Related to Women </h1>
+  
+
+  <div class="container">
+
+    <div class="card">
+      <div class="front"><h2>1️⃣ The Dowry Prohibition Act, 1961</h2></div>
+      <div class="back">
+        <p>This law prohibits giving, taking, or demanding dowry before, during, or after marriage. 
+        It protects women from harassment or violence related to dowry. Violation can lead to imprisonment and fines.</p>
+        <p><a href="dowry_prohibition.pdf" target="_blank">Read Official Law</a></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="front"><h2>2️⃣ Protection of Women from Domestic Violence Act, 2005</h2></div>
+      <div class="back">
+        <p>This act provides protection to women from physical, sexual, verbal, emotional, and economic abuse within households.
+        It empowers women to seek protection orders and residence rights.</p>
+        <p><a href="Protection-of-Women-from-Domestic-Violence-Act,-2005_0.pdf" target="_blank">Read on WCD Website</a></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="front"><h2>3️⃣ Sexual Harassment of Women at Workplace Act, 2013</h2></div>
+      <div class="back">
+        <p>This act ensures a safe and respectful working environment for women. 
+        It mandates Internal Complaints Committees in every organization to address harassment cases.</p>
+        <p><a href="DoE_Prevention_sexual_harassment.pdf" target="_blank">Know More</a></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="front"><h2>4️⃣ The Maternity Benefit Act, 1961</h2></div>
+      <div class="back">
+        <p>This act ensures paid maternity leave and job protection for women during maternity. 
+        It allows 26 weeks of paid leave for working mothers and also covers adoption and surrogacy cases.</p>
+        <p><a href="the_maternity_benefit_act_1961_0.pdf" target="_blank">Official PDF</a></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="front"><h2>5️⃣ The Equal Remuneration Act, 1976</h2></div>
+      <div class="back">
+        <p>This act ensures that men and women get equal pay for equal work. 
+        It prohibits discrimination in recruitment and employment on gender basis.</p>
+        <p><a href="equal_remuneration_act_1976.pdf" target="_blank">Read Full Act</a></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="front"><h2>6️⃣ The Indecent Representation of Women Act, 1986</h2></div>
+      <div class="back">
+        <p>This law prohibits indecent depiction of women in advertisements, publications, and electronic media. 
+        It aims to preserve the dignity of women in all forms of communication.</p>
+        <p><a href="indecent_representation_of_women_(prohibition)_act,_1986.pdf" target="_blank">Visit Official Page</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2025 Women's Safety Project | Designed with ❤ by Team SecureHer
+  </footer>
+
+</body>
+</html>

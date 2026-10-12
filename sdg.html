@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Saheli Suraksha - Self Defence Guidance</title>
+    <style>
+        /*
+        Color Palette:
+        - Primary White/Light Background: #ffffff (White) / #f4f9ff (Faint Blue)
+        - Accent Blue: #5b92e5 (Sky Blue - Trust, Calmness)
+        - Header/Strong Accent: #0056b3 (Deep Blue - Confidence, Stability)
+        - Text Color: #333333 (Dark Gray)
+        */
+
+        body {
+            font-family: 'Poppins', sans-serif; /* A modern, clean font */
+            background: #f4f9ff; /* Faint blue background */
+            margin: 0;
+            padding: 0;
+            color: #333333;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Smooth scrolling for navigation */
+        }
+
+        header {
+            background-color: #0056b3; /* Deep Blue Header */
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky; /* Sticky navigation for easy access */
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar a {
+            color: #0056b3;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .navbar a:hover {
+            background-color: #5b92e5;
+            color: white;
+            border: 1px solid #5b92e5;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            color: #0056b3;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #5b92e5;
+            padding-bottom: 5px;
+            font-size: 1.8rem;
+        }
+
+        /* Basic Tips styling */
+        .tip {
+            background: #e6f0ff; /* Lightest blue for tips */
+            border-left: 6px solid #5b92e5;
+            margin: 12px 0;
+            padding: 18px 25px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            color: #333;
+        }
+
+        /* Self-defense moves - Accordion style */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .move-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .move {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px;
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        .move:hover {
+            background-color: #f0f7ff;
+        }
+
+        .move img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            border: 2px solid #5b92e5;
+        }
+
+        .move-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #0056b3;
+            flex-grow: 1;
+        }
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            color: #0056b3;
+            transition: transform 0.3s;
+        }
+
+        .move-details {
+            display: none;
+            padding: 15px;
+            background-color: #f0f7ff; /* Very light blue for details */
+            border-top: 1px solid #e0e0e0;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .move.active .toggle-icon {
+            transform: rotate(45deg); /* Simple visual indicator for active state */
+        }
+
+        /* Emergency Contacts */
+        .emergency-contacts {
+            background-color: #ffeaea; /* Soft red/pink for alert/urgency */
+            border-left: 8px solid #cc0000; /* Strong red */
+            padding: 25px;
+            color: #222;
+        }
+
+        .emergency-contacts ul {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+        }
+
+        .emergency-contacts li {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 5px 0;
+        }
+
+        .emergency-contacts li strong {
+            color: #cc0000;
+            font-size: 1.25rem;
+        }
+
+        /* Video section */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0056b3;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.8rem;
+            }
+
+            main {
+                padding: 0 15px;
+            }
+
+            .navbar a {
+                display: block;
+                margin: 5px auto;
+                width: 80%;
+            }
+            
+            .emergency-contacts ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .move {
+                padding: 10px;
+            }
+
+            .move img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Saheli Suraksha: Self Defence Guidance
+    </header>
+
+    <nav class="navbar">
+        <a href="#tips">Safety Tips</a>
+        <a href="#moves">Self Defence Moves</a>
+        <a href="#emergency">Emergency</a>
+        <a href="#videos">Video Resources</a>
+    </nav>
+
+    <main>
+        <section id="tips">
+            <h2><span class="emoji">💡</span> Basic Safety Tips: Awareness is Key</h2>
+
+            <div class="tip">
+                <p><strong>Be aware of your surroundings</strong> and always trust your intuition. If a situation feels wrong, it probably is—leave immediately.</p>
+            </div>
+
+            <div class="tip">
+                <p>Stay in **well-lit and populated areas**, especially at night. If possible, avoid shortcuts through isolated or dark places.</p>
+            </div>
+
+            <div class="tip">
+                <p>Carry a **whistle, pepper spray, or personal alarm** (check local laws). Have it easily accessible in your hand or outer pocket, not buried in a bag.</p>
+            </div>
+
+            <div class="tip">
+                <p>Inform a **trusted friend or family member** about your itinerary and estimated time of arrival. Use a live location sharing feature if available.</p>
+            </div>
+
+            <div class="tip">
+                <p>Avoid distractions like headphones or constantly looking at your phone when walking alone. **Be present** and vigilant.</p>
+            </div>
+        </section>
+
+        <section id="moves">
+            <h2><span class="emoji">👊</span> Simple Self Defence Moves: For Quick Escape</h2>
+            <p><em>The primary goal is to create an opportunity to **escape**, not to win a fight. Target vulnerable areas and run!</em></p>
+
+            <ul>
+                <li class="move-item">
+                    <div class="move" onclick="toggleDetails(this)">
+                        <img src="palm_strike.jpg" alt="Palm Strike" />
+                        <div class="move-title">Palm Strike</div>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="move-details">
+                        **Target:** Nose or Chin. Use the heel of your palm to strike upward and forcefully into the attacker’s nose or chin. This causes pain and disorientation, allowing you to run.
+                    </div>
+                </li>
+
+                <li class="move-item">
+                    <div class="move" onclick="toggleDetails(this)">
+                        <img src="Groin-Kick-1.jpg" alt="Groin Kick"/>
+                        <div class="move-title">Groin Kick</div>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="move-details">
+                        **Target:** It is a highly effective way to get an attacker to release you. The groin is one of the most sensitive areas for men and hence a good body part to attack. You can use your knees to hit your attacker or use a front kick to the groin.
+                    </div>
+                </li>
+
+                <li class="move-item">
+                    <div class="move" onclick="toggleDetails(this)">
+                        <img src="Knee-Kick-1.jpg" alt="Knee Strike" />
+                        <div class="move-title">Knee Strike</div>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="move-details">
+                        **Target:** Groin or Midsection. Bring your knee sharply up. This is highly effective at close range for causing pain and briefly immobilizing the attacker.
+                    </div>
+                </li>
+
+                <li class="move-item">
+                    <div class="move" onclick="toggleDetails(this)">
+                        <img src="Straight-Punch-1.jpg" alt="Straight Punch" />
+                        <div class="move-title">Straight Punch</div>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="move-details">
+                        **Target:** A punch is the easiest way to get someone out of your personal space. But it is also important to remember to throw a proper punch. Else, you could end up with broken fingers.
+                        <img src="How-to-make-a-punch-1.jpg" alt="how to make punch">
+                    </div>
+                </li>
+
+                <li class="move-item">
+                    <div class="move" onclick="toggleDetails(this)">
+                        <img src="Eye-Strike-1.jpg" alt="Eye strike" />
+                        <div class="move-title">Eye strike</div>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="move-details">
+                        **Target:** A very simple self-defence move that can be used in any situation. An eye strike forces your attacker to loosen their grip on you and allows you to use a more forceful move or run away altogether. Since the eye is a sensitive area, 
+                        striking this part renders the attacker helpless.
+                    </div>
+                </li>
+                 <li class="move-item">
+                    <div class="move" onclick="toggleDetails(this)">
+                        <img src="Hammer-Strike-1.jpg" alt="Hammer strike" />
+                        <div class="move-title">Hammer fist strike</div>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="move-details">
+                        **Target:** A hammer fist is a versatile strike and also a fairly easy self-defence move for women. You can throw a punch in any direction and from any position. Standing, sitting or even if you are lying down, you can strike a hammer fist.
+                         You can use a hammer fist to attack the throat, nose, jaw, stomach, or groin.
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="emergency" class="emergency-contacts">
+            <h2><span class="emoji">🚨</span> Emergency Contacts: Know Them By Heart</h2>
+            <p>In an emergency, dial these numbers immediately or use the SOS button on your phone.</p>
+            <ul>
+                <li>Police: <strong>100</strong></li>
+                <li>Women’s Helpline: <strong>1091</strong></li>
+                <li>Ambulance/Fire: <strong>102</strong></li>
+            </ul>
+        </section>
+
+        <section id="videos">
+            <h2><span class="emoji">▶️</span> Video Resources: Practice Makes Prepared</h2>
+            <p>Watch and practice these techniques regularly to build muscle memory.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/4qsC0ZC7Jx0" title="Basic Self Defense Techniques" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/1V-_jXVrY9k" title="Simple Self Defence Moves for Women" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section>
+            <h2><span class="emoji">✅</span> Additional Safety Reminders</h2>
+            <ul>
+                <li>Keep your phone **charged** and accessible at all times, with an emergency contact on speed dial.</li>
+                <li>Attend **self-defence workshops** or classes offered by local NGOs/police for hands-on experience.</li>
+                <li>Use security apps that share your live location with trusted contacts and have a panic button.</li>
+                <li>Trust your gut feeling and **report suspicious behavior** immediately to authorities or security personnel.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Her Voice, Her Power NGO | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function toggleDetails(moveElement) {
+            // Toggle the 'active' class on the clicked move element
+            moveElement.classList.toggle('active');
+            
+            // Find the corresponding details element, which is the next sibling
+            const details = moveElement.nextElementSibling;
+
+            // Toggle the display of the details section
+            if (details.style.display === "block") {
+                details.style.display = "none";
+            } else {
+                details.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

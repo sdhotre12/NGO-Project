@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety & Complaint Processing FAQs</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font and custom colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-safe': '#0c4a6e', // Dark Blue for authority/trust (based on blueGreen theme)
+                        'secondary-welfare': '#f472b6', // Pink for care/support
+                        'background-light': '#fefcfc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for smoother transition and hover effects */
+        .faq-item-header {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .faq-item-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        }
+
+        .faq-item-answer.open {
+            max-height: 1000px; /* Increased max-height for long answer lists */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .rotate-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* 3D Hover Effect Styles */
+        .faq-item {
+            perspective: 1000px; /* Establishes a 3D context for children */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transform-style: preserve-3d; /* Ensures children maintain 3D position */
+        }
+
+        .faq-item:hover {
+            transform: translateY(-8px) rotateX(5deg); /* Lifts and slightly rotates */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow for depth */
+        }
+
+        /* For the content inside the FAQ item, to ensure it doesn't flatten */
+        .faq-item > * {
+            transform: translateZ(20px); /* Pushes content slightly forward in 3D space */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Specific list styling for better readability of complaint categories */
+        .answer-list {
+            margin-top: 0.5rem;
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            columns: 2; /* Display list in two columns on larger screens */
+            gap: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .answer-list {
+                columns: 1; /* Single column on mobile */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 sm:p-8 font-sans">
+
+    <div class="max-w-4xl mx-auto bg-background-light shadow-2xl rounded-xl p-6 md:p-10 border-t-4 border-primary-safe">
+
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-primary-safe mb-2">
+                Safety & Complaint Processing FAQs
+            </h1>
+            <p class="text-lg text-gray-600">
+                Information regarding filing and processing of safety complaints.
+            </p>
+        </header>
+
+        <!-- FAQ Accordion Container -->
+        <div id="faq-container" class="space-y-4">
+
+            <!-- FAQ Item 1: How to file -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg rounded-t-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer1">
+                    <span>1. How can I file a complaint before the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer1" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        A person intending to file a complaint before the Commission for women may do so by making a complaint on the official website of the Commission <a href="https://ncwapps.nic.in" target="_blank" class="text-secondary-welfare hover:underline font-medium">https://ncwapps.nic.in</a> under the section of <strong>Register Online Complaints</strong>. One can also send a written application containing all the important details (along with supporting documents, if any) through post or by hand.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2: Who can file -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer2">
+                    <span>2. Who can file a complaint before the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer2" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        Any case involving <strong>deprivation of women’s right or harassment of women in India</strong> can be registered with the Commission for Women. The complaint should disclose complete details of the matter with specific relief/intervention sought from the Commission for Women.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3: Entertained categories -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer3">
+                    <span>3. What Category of complaints are entertained by the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer3" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p class="font-semibold mb-2">The Commission entertains a wide range of complaints, including:</p>
+                    <ul class="answer-list">
+                        <li>Abduction</li>
+                        <li>Acid Attack</li>
+                        <li>Causing Miscarriage</li>
+                        <li>Criminal Intimidation/Assault</li>
+                        <li>Cybercrimes Against Women</li>
+                        <li>Denial Of Maternity Benefits to Women</li>
+                        <li>Domestic Violence</li>
+                        <li>Dowry Harassment</li>
+                        <li>Dowry Death</li>
+                        <li>Gender Discrimination, Including Equal Right to Education & Work</li>
+                        <li>Murder</li>
+                        <li>Attempt To Murder</li>
+                        <li>Outraging Modesty of Women/Molestation</li>
+                        <li>Police Apathy Against Women</li>
+                        <li>Polygamy/Bigamy</li>
+                        <li>Triple Talaq</li>
+                        <li>Rape</li>
+                        <li>Request For Free Legal Aid to Women</li>
+                        <li>Right To Exercise Choice in Marriage</li>
+                        <li>Honor Killing</li>
+                        <li>Sex Selective Abortion; Female Foeticide / Amniocentesis</li>
+                        <li>Sexual Assault</li>
+                        <li>Sexual Harassment</li>
+                        <li>Sexual Harassment of Women at Workplace</li>
+                        <li>Stalking</li>
+                        <li>Voyeurism</li>
+                        <li>Trafficking</li>
+                        <li>Forced Prostitution of Women</li>
+                        <li>Dehumanizing And Stigmatization of Women</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4: Not entertained complaints -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer4">
+                    <span>4. What complaints are not entertained by the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer4" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p class="font-semibold mb-2">The following categories of complaints are liable to be summarily dismissed:</p>
+                    <ul class="answer-list">
+                        <li>Complaints illegible or vague, anonymous or pseudonymous.</li>
+                        <li>If the matter relates to a civil dispute between the parties such as contractual rights or obligations.</li>
+                        <li>The issue raised relates to service matters not involving any deprivation of women’s rights.</li>
+                        <li>The issue raised relates to labour/ industrial disputes not involving any deprivation of women’s rights.</li>
+                        <li>Matter is sub judice in a Court/ Tribunal.</li>
+                        <li>Matter is pending before a State Commission.</li>
+                        <li>Matter has already been decided by the Commission.</li>
+                        <li>Matter is outside the purview of the Commission for Women on any other ground.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FAQ Item 5: Acceptance notification -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer5">
+                    <span>5. How will I know if my complaint has been accepted by the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer5" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        An acknowledgment along with **complaint number, login ID and password** is sent to the complainant upon receipt of the complaint if it has been accepted. In the event of the complaint being rejected, the same shall be communicated to the complainant at the earliest. You can also check telephonically or by personally visiting the Commission for Women.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 6: Status check -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer6">
+                    <span>6. How can I check the status of my complaint?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer6" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        If your complaint is accepted, you will be allotted a complaint number with login ID and password which can be used to track the status of your complaint on the website of the Commission. You can also check the same telephonically or by personally visiting the Commission for Women.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 7: Helpline -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer7">
+                    <span>7. What is your helpline No.?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer7" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        For complaint related queries dial the **24x7 Women Helpline Number: 7827170170**.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 8: Contact hours -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer8">
+                    <span>8. When can I contact the Commission?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer8" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        You can contact us anytime between **9:00 AM – 5:30 PM** on **Working Days (Monday to Friday)**. You can also send details through email at any time.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 9: Required information -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer9">
+                    <span>9. What information do I need to provide while filing a complaint?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer9" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p class="font-semibold mb-2">You should provide the following details:</p>
+                    <ul class="answer-list columns-1">
+                        <li>Contact details of the complainant and the respondent (if available)</li>
+                        <li>Brief description of the incident</li>
+                        <li>Details of remedies already exhausted</li>
+                        <li>Supporting documents (if any)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FAQ Item 10: Complaint process -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer10">
+                    <span>10. How is my complaint processed in the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer10" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p class="font-semibold mb-2">On receipt of a complaint, the commission:</p>
+                    <ul class="answer-list columns-1">
+                        <li>Scrutinizes the complaint as per the mandate.</li>
+                        <li>Mandated complaints are registered and a case number is allotted.</li>
+                        <li>Non-mandated complaints are summarily dismissed upon intimation.</li>
+                    </ul>
+                    <p class="font-semibold mt-4 mb-2">Following actions are mainly taken to redress the grievances:</p>
+                    <ul class="answer-list columns-1">
+                        <li>Expediting/monitoring police investigation.</li>
+                        <li>Monitor proper implementation of statutory provisions.</li>
+                        <li>Resolving the issues through mediation/counseling.</li>
+                        <li>For serious crimes, the Commission forms an Inquiry Committee which further examines various aspects of the case.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FAQ Item 11: Sexual harassment at workplace -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer11">
+                    <span>11. If I am being sexually harassed at my work place can the Commission for Women help me?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer11" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        **Yes**, you can file a complaint with the Commission for Women. The Commission will take up your case with your employer/concerned organization to monitor the proceedings of your complaint as per the mandatory provisions of the **Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013**.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 12: Maternity Benefit Act -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer12">
+                    <span>12. If I am being deprived of the benefit of the Maternity Benefit Act, 1961 can I file a complaint with the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer12" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        **Yes**, you can approach the Commission for Women in case your employer/ concerned organization is denying you the maternity benefit as per the provisions of the **Maternity Benefit Act, 1961**.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 13: Marital discord -->
+            <div class="faq-item border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <button class="faq-item-header w-full flex justify-between items-center p-4 sm:p-5 bg-white text-primary-safe font-bold text-left text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-safe" aria-expanded="false" aria-controls="answer13">
+                    <span>13. If I’m having a marital discord with my husband and in-laws can I approach the Commission for Women?</span>
+                    <svg class="rotate-icon w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="answer13" class="faq-item-answer px-4 text-gray-700 bg-gray-50 rounded-b-lg">
+                    <p>
+                        **Yes**, you can seek the Commission for Women or State Women Commission’s help if you want to resolve the issue through **mediation, counseling** or for **expediting police investigation**.
+                    </p>
+                </div>
+            </div>
+
+        </div> <!-- End of FAQ Container -->
+
+        <!-- Action Section -->
+        <div class="mt-10 pt-6 border-t border-gray-300 text-center">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Complaint-Related Queries</h3>
+            <div class="space-y-2">
+                <a href="tel:7827170170" class="inline-block px-6 py-3 bg-primary-safe text-white font-bold rounded-full shadow-lg hover:bg-sky-700 transform transition duration-300 hover:scale-105">
+                    Call 24x7 Women Helpline: 7827170170
+                </a>
+                <p class="text-sm text-gray-500">
+                    For complaint-related queries, available 24/7.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqContainer = document.getElementById('faq-container');
+            const headers = faqContainer.querySelectorAll('.faq-item-header');
+
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const answer = header.nextElementSibling;
+                    const icon = header.querySelector('.rotate-icon');
+
+                    // Check if the current item is already open
+                    const isOpening = !answer.classList.contains('open');
+
+                    // 1. Close all other open answers (Accordion behavior)
+                    faqContainer.querySelectorAll('.faq-item-answer.open').forEach(openAnswer => {
+                        if (openAnswer !== answer) {
+                            openAnswer.classList.remove('open');
+                            openAnswer.previousElementSibling.setAttribute('aria-expanded', 'false');
+                            const openIcon = openAnswer.previousElementSibling.querySelector('.rotate-icon');
+                            if (openIcon) {
+                                openIcon.classList.remove('rotated');
+                            }
+                        }
+                    });
+
+                    // 2. Toggle the clicked item's state
+                    if (isOpening) {
+                        // Open the answer
+                        answer.classList.add('open');
+                        header.setAttribute('aria-expanded', 'true');
+                        icon.classList.add('rotated');
+                    } else {
+                        // Close the answer
+                        answer.classList.remove('open');
+                        header.setAttribute('aria-expanded', 'false');
+                        icon.classList.remove('rotated');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

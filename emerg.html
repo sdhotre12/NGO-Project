@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emergency Contacts | NGO for Girls Welfare & Safety</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --faint-blue: #e6f0fa;
+      --primary-blue: #4b8ceb;
+      --accent: #50bddc;
+      --white: #fff;
+      --card-bg: #f7fbff;
+      --hover-bg: #def2fd;
+      --shadow-light: rgba(76, 142, 224, 0.1);
+      --shadow-strong: rgba(76, 142, 224, 0.2);
+      --border-radius: 16px;
+      --btn-radius: 9px;
+      --text-dark: #2a3c55;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--faint-blue);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+    header img{
+       height: 100px;
+      width: 100px;
+    }
+    main.container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      padding: 36px 28px 44px 28px;
+      box-shadow: 0 6px 36px var(--shadow-light);
+      animation: fadeSlideIn 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .logo {
+      width: 42px;
+      height: 42px;
+      background: var(--primary-blue);
+      border-radius: 50%;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.8em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 3px 14px var(--shadow-strong);
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 1.9em;
+      color: var(--primary-blue);
+      margin: 0;
+    }
+    header small {
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 1em;
+    }
+    .address-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 1.07em;
+      color: var(--text-dark);
+    }
+    .address-bar input {
+      flex: 1;
+      padding: 11px 15px;
+      font-size: 1.1em;
+      border-radius: var(--btn-radius);
+      border: 2px solid var(--primary-blue);
+      background: var(--card-bg);
+      outline: none;
+      transition: border 0.25s ease;
+    }
+    .address-bar input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 11px var(--accent);
+    }
+    .helplines-grid,
+    .emergency-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 18px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 18px var(--shadow-light);
+      padding: 20px 20px 24px 20px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      cursor: default;
+    }
+    .card:hover,
+    .card:focus-within {
+      background: var(--hover-bg);
+      box-shadow: 0 13px 30px var(--shadow-strong);
+      transform: translateY(-6px);
+      cursor: pointer;
+    }
+    .card-title {
+      font-weight: 700;
+      font-size: 1.3em;
+      color: var(--primary-blue);
+      margin-bottom: 5px;
+    }
+    .card-description {
+      color: #5a88be;
+      font-size: 1em;
+      margin-bottom: 18px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    button.action-btn {
+      flex: 1 1 45%;
+      background-color: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      border-radius: var(--btn-radius);
+      font-size: 1.05em;
+      font-weight: 600;
+      padding: 9px 10px;
+      box-shadow: 0 3px 10px var(--shadow-strong);
+      cursor: pointer;
+      transition: background-color 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    button.action-btn:hover {
+      background-color: var(--accent);
+      box-shadow: 0 7px 17px var(--shadow-strong);
+    }
+    button.action-btn:active {
+      transform: scale(0.97);
+    }
+    .btn-icon {
+      font-size: 1.3em;
+    }
+    section.emergency-section {
+      margin-top: 42px;
+      padding: 18px 24px;
+      background-color: var(rgb(160, 201, 255));
+      border-radius: (--border-radius);
+      color: var(--primary-blue);
+      box-shadow: 0 4px 22px var(--shadow-strong);
+    }
+    section.emergency-section h2 {
+      margin: 0 0 18px 0;
+      font-weight: 700;
+      font-size: 1.55em;
+      color: var(--white);
+      user-select: none;
+    }
+    .emergency-grid {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .emergency-card {
+      background-color: var(--white);
+      color: var(--primary-blue);
+      border-radius: var(--btn-radius);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 200px;
+      box-shadow: 0 2px 16px var(--shadow-light);
+      cursor: pointer;
+      transition: background-color 0.23s ease, box-shadow 0.23s ease;
+      user-select: none;
+    }
+    .emergency-card:hover {
+      background-color: var(--hover-bg);
+      box-shadow: 0 8px 22px var(--shadow-strong);
+    }
+    .emergency-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+    .emergency-icon {
+      font-size: 2.1em;
+    }
+    .emergency-number {
+      letter-spacing: 2px;
+    }
+    .emergency-actions button {
+      background-color: var(--primary-blue);
+      border: none;
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: var(--btn-radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1em;
+      box-shadow: 0 4px 20px var(--shadow-strong);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .emergency-actions button:hover {
+      background-color: var(--accent);
+      box-shadow: 0 6px 28px var(--shadow-strong);
+    }
+    /* Modal */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(49, 138, 205, 0.15);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .modal-bg.active {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--white);
+      border-radius: var(--btn-radius);
+      padding: 30px 36px;
+      box-shadow: 0 7px 45px var(--shadow-strong);
+      min-width: 340px;
+      max-width: 90vw;
+      position: relative;
+      font-family: 'Roboto', Arial, sans-serif;
+      user-select: none;
+    }
+    .modal-content h3 {
+      margin: 0 0 18px 0;
+      color: var(--primary-blue);
+      font-weight: 700;
+      font-size: 1.4em;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: var(--accent);
+      border: none;
+      color: var(--white);
+      border-radius: 8px;
+      font-size: 1.1em;
+      padding: 6px 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.25s ease;
+      user-select: none;
+    }
+    .modal-close:hover {
+      background: var(--primary-blue);
+    }
+    .modal-input,
+    .modal-textarea {
+      width: 100%;
+      padding: 13px 15px;
+      margin-bottom: 18px;
+      border-radius: var(--btn-radius);
+      border: 1.5px solid var(--faint-blue);
+      font-size: 1.1em;
+      color: var(--text-dark);
+      font-weight: 500;
+      resize: vertical;
+      transition: box-shadow 0.3s ease;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+    .modal-input:focus,
+    .modal-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+    .modal-btn-submit {
+      background: var(--primary-blue);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.2em;
+      border: none;
+      padding: 14px 26px;
+      border-radius: var(--btn-radius);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .modal-btn-submit:hover {
+      background: var(--accent);
+    }
+    #reportStatus {
+      margin-top: 12px;
+      font-size: 1em;
+      color: #4273cc;
+      font-weight: 600;
+      min-height: 24px;
+      user-select: none;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      main.container {
+        padding: 24px 18px 34px 18px;
+      }
+      .address-bar {
+        font-size: 1em;
+      }
+      .helplines-grid,
+      .emergency-grid {
+        grid-template-columns: 1fr;
+      }
+      button.action-btn {
+        flex-grow: 1;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Emergency contact information for NGO girls welfare and safety">
+    <header>
+      <div><img src="logo.png" alt="logo"></div>
+      <div>
+        <h1>Girls Welfare & Safety</h1>
+        <small>Emergency Contacts and Nearest Helplines</small>
+      </div>
+    </header>
+    <div class="address-bar">
+      <label for="addressInput">Your Address:</label>
+      <input id="addressInput" aria-describedby="addressHelp" placeholder="Enter your area (e.g. Hyderabad)" autocomplete="street-address" />
+    </div>
+    <section aria-live="polite" aria-atomic="true" aria-relevant="additions" aria-label="Nearest helpline centers">
+      <div class="helplines-grid" id="helplinesGrid" role="list"></div>
+    </section>
+    <section class="emergency-section" aria-label="Emergency contact numbers">
+      <h2>Emergency Numbers</h2>
+      <div class="emergency-grid" id="emergencyGrid" role="list"></div>
+    </section>
+  </main>
+
+  <!-- Modal for Incident Report -->
+  <div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close report form" onclick="closeModal()">×</button>
+      <h3 id="modalTitle">Report an Incident</h3>
+      <form id="reportForm" onsubmit="return submitReport(event)">
+        <input type="text" aria-label="Your Name" id="reportName" class="modal-input" placeholder="Your name (optional)" />
+        <input
+          type="text"
+          aria-label="Area or Address"
+          id="reportArea"
+          class="modal-input"
+          placeholder="Area or Address"
+          required
+        />
+        <textarea
+          id="reportMsg"
+          aria-label="Describe the incident"
+          placeholder="Describe the incident..."
+          class="modal-textarea"
+          rows="5"
+          required
+        ></textarea>
+        <button type="submit" class="modal-btn-submit">Send Report</button>
+      </form>
+      <div id="reportStatus" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script>
+    const helplines = {
+      default: [
+        {
+          title: 'Girls Police Helpdesk',
+          desc: 'SE16 Police Station',
+          phone: '100',
+          email: 'helpdesk@ngogirls.org',
+          maps: 'https://maps.google.com?q=SE16+Police+Station,Hyderabad',
+        },
+        {
+          title: 'Women Charity Home',
+          desc: 'Teresa Charity Home',
+          phone: '04022113344',
+          email: 'contact@teresacharity.org',
+          maps: 'https://maps.google.com?q=Teresa+Charity+Home,Hyderabad',
+        },
+        {
+          title: 'Nehru Grocery Store',
+          desc: 'Local Grocery Store',
+          phone: '04011223344',
+          email: 'info@nehrugrocery.org',
+          maps: 'https://maps.google.com?q=Nehru+Grocery+Store,Hyderabad',
+        },
+        {
+          title: 'SRM Public Hospital',
+          desc: 'Nearby Hospital',
+          phone: '04055332211',
+          email: 'info@srmhospital.in',
+          maps: 'https://maps.google.com?q=SRM+Public+Hospital,Hyderabad',
+        },
+      ],
+      hyderabad: [
+        {
+          title: 'Girls Police Desk',
+          desc: 'Lal Bagh Police',
+          phone: '100',
+          email: 'help.hyderabad@ngogirls.org',
+          maps: 'https://maps.google.com?q=Lal+Bagh+Police,Hyderabad',
+        },
+        {
+          title: 'Hyderabad Women NGO',
+          desc: 'Hyderabad Safe Centre',
+          phone: '04012345678',
+          email: 'contact@hydngocentre.org',
+          maps: 'https://maps.google.com?q=Hyderabad+Women+Centre',
+        },
+        {
+          title: 'SMS Super Store',
+          desc: 'Local Supermarket',
+          phone: '04099887744',
+          email: 'info@smssuperstore.org',
+          maps: 'https://maps.google.com?q=SMS+Super+Store,Hyderabad',
+        },
+      ],
+    };
+
+    const emergencies = [
+      { label: 'Police', num: '112', icon: '👮' },
+      { label: 'Women Helpline', num: '181', icon: '👩‍🦰' },
+      { label: 'Ambulance', num: '108', icon: '🚑' },
+      { label: 'Fire Rescue', num: '101', icon: '🚒' },
+    ];
+
+    const helplinesGrid = document.getElementById('helplinesGrid');
+    const emergencyGrid = document.getElementById('emergencyGrid');
+    const addressInput = document.getElementById('addressInput');
+    const modalBg = document.getElementById('modalBg');
+    const reportStatus = document.getElementById('reportStatus');
+    const reportForm = document.getElementById('reportForm');
+
+    // Render nearest helplines
+    function renderHelplines(area = 'default') {
+      const list = helplines[area] || helplines['default'];
+      helplinesGrid.innerHTML = '';
+      list.forEach((hl) => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.tabIndex = 0;
+        card.setAttribute('role', 'listitem');
+        card.innerHTML = `
+          <h3 class="card-title">${hl.title}</h3>
+          <p class="card-description">${hl.desc}</p>
+          <div class="actions">
+            <button class="action-btn" title="Call ${hl.title}" onclick="callNumber('${hl.phone}')">
+              <span class="btn-icon">📞</span> Call
+            </button>
+            <button class="action-btn" title="Get directions to ${hl.title}" onclick="openMaps('${hl.maps}')">
+              <span class="btn-icon">🗺️</span> Directions
+            </button>
+            <button class="action-btn" title="Send email to ${hl.title}" onclick="composeMail('${hl.email}', 'Emergency Contact', 'I need help from ${hl.title}.')">
+              <span class="btn-icon">✉️</span> Email
+            </button>
+            <button class="action-btn" title="Report incident about ${hl.title}" onclick="openReport('${hl.title}')">
+              <span class="btn-icon">⚠️</span> Report
+            </button>
+          </div>
+        `;
+        helplinesGrid.appendChild(card);
+      });
+    }
+
+    // Render emergency numbers
+    function renderEmergency() {
+      emergencyGrid.innerHTML = '';
+      emergencies.forEach((em) => {
+        const emCard = document.createElement('article');
+        emCard.className = 'emergency-card';
+        emCard.tabIndex = 0;
+        emCard.setAttribute('role', 'listitem');
+        emCard.innerHTML = `
+          <div class="emergency-info">
+            <span class="emergency-icon" aria-hidden="true">${em.icon}</span>
+            <span>${em.label}</span>
+            <span class="emergency-number">${em.num}</span>
+          </div>
+          <div class="emergency-actions">
+            <button aria-label="Call ${em.label}" onclick="callNumber('${em.num}')">Call</button>
+            <button aria-label="Report about ${em.label}" onclick="openReport('${em.label}')">Report</button>
+          </div>
+        `;
+        emergencyGrid.appendChild(emCard);
+      });
+    }
+
+    // Phone call action
+    function callNumber(number) {
+      window.open(`tel:${number}`, '_self');
+    }
+
+    // Open map directions link
+    function openMaps(url) {
+      window.open(url, '_blank', 'noopener');
+    }
+
+    // Send mailto link
+    function composeMail(email, subject, body) {
+      const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(url, '_blank', 'noopener');
+    }
+
+    // Open modal for report
+    function openReport(who) {
+      modalBg.classList.add('active');
+      document.getElementById('modalTitle').innerText = `Report an Incident: ${who}`;
+      document.getElementById('reportMsg').value = `Reporting incident concerning ${who}.`;
+      document.getElementById('reportArea').value = addressInput.value.trim();
+      document.getElementById('reportName').value = '';
+      reportStatus.textContent = '';
+      document.getElementById('reportName').focus();
+    }
+
+    // Close modal
+    function closeModal() {
+      modalBg.classList.remove('active');
+      reportForm.reset();
+      reportStatus.textContent = '';
+    }
+
+    // Submit incident report (mock)
+    function submitReport(event) {
+      event.preventDefault();
+      reportStatus.textContent = 'Report submitted. Our team will contact you shortly.';
+      setTimeout(() => {
+        closeModal();
+      }, 2200);
+      return false;
+    }
+
+    // Render content initially and on area input
+    renderHelplines();
+    renderEmergency();
+
+    addressInput.addEventListener('input', () => {
+      const val = addressInput.value.trim().toLowerCase();
+      if (val.includes('hyderabad')) renderHelplines('hyderabad');
+      else renderHelplines('default');
+    });
+
+    // Keyboard accessibility: Close modal on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalBg.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

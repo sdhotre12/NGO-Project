@@ -1,0 +1,896 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Emergency Contacts | NGO for Girls Welfare & Safety</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --faint-blue: #e6f0fa;
+      --primary-blue: #4b8ceb;
+      --white: #fff;
+      --accent: #50bddc;
+    }
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--faint-blue);
+      color: #232a35;
+      margin: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 3em auto;
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 4px 28px rgba(60,120,180,0.12);
+      padding: 2em 2em;
+    }
+    h1 { color: var(--primary-blue); margin-bottom: 0.2em;}
+    h2 { color: var(--accent);}
+    .address-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      margin: 1em 0;
+    }
+    .address-bar input {
+      flex: 1;
+      padding: .6em 1em;
+      border-radius: 8px;
+      border: 1.5px solid var(--primary-blue);
+      font-size: 1em;
+      background: #f7f9fd;
+    }
+    .helplines-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 1em;
+    }
+    .helpline-card {
+      background: var(--faint-blue);
+      border-radius: 14px;
+      box-shadow: 0 2px 14px rgba(76,142,224,0.09);
+      padding: 1.2em;
+      margin-bottom: 0;
+      animation: fadeIn 0.6s;
+      transition: 0.19s;
+    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    .helpline-card:hover { background: #eaf6fd; box-shadow: 0 6px 22px rgba(60,120,180,0.16);}
+    .card-title { font-weight: 600; color: var(--primary-blue);}
+    .card-desc { color: #4b93cd; font-size: 0.99em; margin-bottom:.8em;}
+    .card-actions { display: flex; gap: 0.6em; flex-wrap: wrap;}
+    .card-actions button {
+      background: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 7px;
+      padding: .5em 1.25em;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .card-actions button:hover { background: #50bddc;}
+    /* Emergency Section */
+    .emergency-section {
+      background: var(--primary-blue);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 2em 1em;
+      margin: 2em 0;
+      box-shadow: 0 3px 21px rgba(76,142,224,0.13);
+      animation: fadeIn 0.7s;
+    }
+    .em-cards {
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+    .em-card {
+      background: var(--white);
+      color: var(--primary-blue);
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 1px 8px rgba(80,189,220,0.07);
+      padding: .75em 1em;
+      margin: .5em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      transition: box-shadow .15s, background .15s;
+    }
+    .em-card:hover { background: #cbe6fe;}
+    .em-icon { font-size: 1.2em;}
+    .em-num { font-weight: 700; margin-left: .5em;}
+    .em-btn { background: var(--primary-blue); color:var(--white); border-radius:7px; border:none; font-size:1em; padding: .45em 1em;}
+    .em-btn:hover { background: var(--accent);}
+    /* Modal */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(49,138,205,0.15);
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+    .modal-bg.active { display: flex; }
+    .modal-content {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.8em 2.2em;
+      box-shadow: 0 5px 32px rgba(76,142,224,0.14);
+      min-width: 285px;
+      max-width: 99vw;
+      position: relative;
+    }
+    .modal-content h3{color:var(--primary-blue);}
+    .modal-close { position: absolute; top:12px; right:14px; border:none; background: var(--accent); color: var(--white); border-radius: 5px; font-size: 1em; padding: .3em 1.2em; cursor:pointer;}
+    .modal-field, .modal-textarea {
+      width: 98%;
+      padding: .5em 1em;
+      border: 1.1px solid var(--faint-blue);
+      margin-bottom: 13px;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    .modal-btn {
+      background: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      border-radius: 7px;
+      padding: .5em 1.5em;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top:.7em;
+    }
+    .modal-btn:hover { background: var(--accent);}
+    @media (max-width:700px) { .container{padding:.5em 1vw;} .helplines-grid{ grid-template-columns:1fr; gap:1em;} .em-cards{ flex-direction: column; gap: .5em;} }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>NGO for Girls Welfare & Safety</h1>
+  <h2>Emergency & Helplines</h2>
+  <div class="address-bar">
+    <span>Area:</span>
+    <input id="addressInput" placeholder="Enter area (e.g. Hyderabad)" />
+  </div>
+  <div class="helplines-grid" id="helplinesGrid"></div>
+  <div class="emergency-section">
+    <strong>Emergency Numbers (Always Reachable)</strong>
+    <div class="em-cards" id="emergencyCards"></div>
+  </div>
+</div>
+<div class="modal-bg" id="modalBg">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">Close</button>
+    <h3>Report an Incident</h3>
+    <input type="text" class="modal-field" id="reportName" placeholder="Your name (optional)">
+    <input type="text" class="modal-field" id="reportArea" placeholder="Area or Address">
+    <textarea class="modal-textarea" id="reportMsg" rows="4" placeholder="Describe..."></textarea>
+    <button class="modal-btn" onclick="submitReport()">Send Report</button>
+    <div id="reportStatus" style="margin-top:8px;color:#49a;"></div>
+  </div>
+</div>
+<script>
+// Demo helplines data (extend with more areas)
+const helplines = {
+  default: [
+    { title: "Girls Police Helpdesk", desc: "SE16 Police Station", phone: "100", email: "helpdesk@ngogirls.org", maps:"https://maps.google.com?q=SE16+Police+Station,Hyderabad" },
+    { title: "Women Charity Home", desc: "Teresa Charity Home", phone: "04022113344", email: "contact@teresacharity.org", maps:"https://maps.google.com?q=Teresa+Charity+Home,Hyderabad" }
+  ],
+  hyderabad: [
+    { title: "Girls Police Desk", desc: "Lal Bagh Police", phone: "100", email: "help.hyderabad@ngogirls.org", maps: "https://maps.google.com?q=Lal+Bagh+Police,Hyderabad" },
+    { title: "Hyderabad Women NGO", desc: "Hyderabad Safe Centre", phone: "04012345678", email: "contact@hydngocentre.org", maps:"https://maps.google.com?q=Hyderabad+Women+Centre" }
+  ]
+};
+const emergencies = [
+  { label: "Police", num: "112", icon:"👮" },
+  { label: "Women Helpline", num: "181", icon:"👩‍🦰" },
+  { label: "Ambulance", num: "108", icon:"🚑" },
+  { label: "Fire Rescue", num: "101", icon:"🚒" }
+];
+function renderHelplines(a="default") {
+  let data = helplines[a]||helplines.default, html='';
+  data.forEach(hl => {
+    html += `<div class="helpline-card">
+      <div class="card-title">${hl.title}</div>
+      <div class="card-desc">${hl.desc}</div>
+      <div class="card-actions">
+        <button onclick="callNumber('${hl.phone}')">Call</button>
+        <button onclick="openMaps('${hl.maps}')">Directions</button>
+        <button onclick="composeMail('${hl.email}', 'Emergency Contact', 'I need help from ${hl.title}.')">Email</button>
+        <button onclick="openReport('${hl.title}')">Report</button>
+      </div>
+    </div>`;
+  });
+  document.getElementById("helplinesGrid").innerHTML = html;
+} -->
+<!-- function renderEmergencyCards() {
+  let html='';
+  emergencies.forEach(em => {
+    html += `<div class="em-card">
+      <span class="em-icon">${em.icon}</span>
+      <span>${em.label}</span>
+      <span class="em-num">${em.num}</span>
+      <button class="em-btn" onclick="callNumber('${em.num}')">Call</button>
+      <button class="em-btn" onclick="openReport('${em.label}')">Report</button>
+    </div>`;
+  });
+  document.getElementById("emergencyCards").innerHTML = html;
+}
+function callNumber(num) {window.open('tel:'+num);}
+function openMaps(url) { window.open(url, '_blank'); }
+function composeMail(email, subject, body){
+  window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+}
+function openReport(whom){
+  document.getElementById("modalBg").classList.add("active");
+  document.getElementById("reportMsg").value = `Reporting incident concerning ${whom}.`;
+  document.getElementById("reportArea").value = document.getElementById("addressInput").value;
+}
+function closeModal(){
+  document.getElementById("modalBg").classList.remove("active");
+  document.getElementById("reportStatus").textContent='';
+  document.getElementById("reportName").value='';
+  document.getElementById("reportArea").value='';
+  document.getElementById("reportMsg").value='';
+}
+function submitReport(){
+  document.getElementById("reportStatus").textContent="Report submitted. Our team will respond soon!";
+  setTimeout(closeModal, 2300); // Demo: auto-close modal
+}
+document.getElementById("addressInput").addEventListener("input", function(){
+  let val = this.value.trim().toLowerCase();
+  if(val.includes("hyderabad")) renderHelplines("hyderabad");
+  else renderHelplines("default");
+});
+renderHelplines(); renderEmergencyCards();
+</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Contact | NGO for Girls Welfare & Safety</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- Colors & Root Variables ---------- */
+    :root {
+      --faint-blue: #e6f0fa;
+      --primary-blue: #4B8CEB;
+      --white: #fff;
+      --text-base: #222a35;
+      --accent: #50bddc;
+      --card-hover: #f1f7fd;
+    }
+
+    /* ---------- Body & Container ---------- */
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--faint-blue);
+      color: var(--text-base);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 4px 32px rgba(60, 120, 180, 0.16);
+      padding: 32px 24px;
+      animation: fadeInUp 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes bounceIn {0%{transform: scale(0.8);}100%{transform:scale(1);}}
+
+    /* ---------- Header ---------- */
+    .header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .header img {
+      height: 100px;
+      width: 100px;
+    }
+    .title-block h1 {
+      font-size: 1.25em;
+      margin: 0;
+      color: var(--primary-blue);
+      font-weight: 700;
+    }
+    .title-block small {
+      color: var(--accent);
+      font-size: 0.92em;
+    }
+
+    /* ---------- Address Bar ---------- */
+    .address-bar {
+      margin: 28px 0 18px 0;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .address-bar input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 9px;
+      border: 1.5px solid var(--primary-blue);
+      background: #f5f9ff;
+      outline: none;
+    }
+    .address-bar input:focus { box-shadow: 0 2px 8px #E6F0FA; }
+
+    /* ---------- Tabs ---------- */
+    .tabs {
+      display: flex;
+      margin-bottom: 18px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 9px 9px 0 0;
+      border: none;
+      font-weight: bold;
+      color: var(--primary-blue);
+      background: var(--faint-blue);
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-right: 3px;
+    }
+    .tab.active { background: var(--primary-blue); color: var(--white); }
+
+    /* ---------- Lists ---------- */
+    .helpline-list, .emergency-list {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      animation: fadeIn 0.4s;
+    }
+    .helpline-list.active, .emergency-list.active { display: grid; }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      min-height: 110px;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.22s;
+    }
+    .card:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: var(--card-hover);
+      box-shadow: 0 6px 18px rgba(76,142,224,0.12);
+    }
+    .card-icon { font-size: 2em; margin-bottom: 5px; }
+    .card-label { font-weight: bold; font-size: 1.05em; }
+    .card-small { font-size: 0.89em; color: #79a3cd; }
+    .call-btn {
+      position: absolute;
+      top: 9px; right: 9px;
+      width: 29px; height: 29px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.18em;
+      cursor: pointer;
+    }
+    .call-btn:active { background: var(--primary-blue); }
+
+    /* ---------- Emergency Cards ---------- */
+    .emergency-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, #e0ecff 0%, #ffffff 100%);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 15px;
+      animation: bounceIn 0.6s;
+    }
+    .emergency-icon { font-size: 1.5em; color: var(--primary-blue); margin-right: 10px; }
+    .emergency-number { font-weight: bold; color: var(--accent); font-size: 1.22em; }
+    .emergency-label { font-weight: 600; font-size: 1.07em; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 480px) {
+      .container { padding: 12px 4px; }
+      .header { flex-direction: column; align-items: flex-start;}
+      .helpline-list, .emergency-list { grid-template-columns: 1fr; gap: 15px;}
+    }
+    
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div><img src="logo.png" alt="logo"></div>
+    <div class="title-block">
+      <h1>Girls Welfare & Safety</h1>
+      <small>Emergency & Nearest Helplines</small>
+    </div>
+  </div>
+
+  <!-- Address Input -->
+  <div class="address-bar">
+    <span>🏠</span>
+    <input id="addressInput" placeholder="Enter your area or address">
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" id="tab-helplines">Nearby Helplines</button>
+    <button class="tab" id="tab-emergency">Emergency Numbers</button>
+  </div>
+
+  <!-- Lists -->
+  <div id="helplineSection" class="helpline-list active"></div>
+  <div id="emergencySection" class="emergency-list"></div>
+
+</div>
+<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close report form" onclick="closeModal()">×</button>
+      <h3 id="modalTitle">Report an Incident</h3>
+      <form id="reportForm" onsubmit="return submitReport(event)">
+        <input type="text" aria-label="Your Name" id="reportName" class="modal-input" placeholder="Your name (optional)" />
+        <input
+          type="text"
+          aria-label="Area or Address"
+          id="reportArea"
+          class="modal-input"
+          placeholder="Area or Address"
+          required
+        />
+        <textarea
+          id="reportMsg"
+          aria-label="Describe the incident"
+          placeholder="Describe the incident..."
+          class="modal-textarea"
+          rows="5"
+          required
+        ></textarea>
+        <button type="submit" class="modal-btn-submit">Send Report</button>
+      </form>
+      <div id="reportStatus" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+<script>
+  // ---------- Helpline Data ----------
+  const helplinesByArea = {
+    default: [
+      { label:"Police Station", icon:'👮', contact:"100", desc:"SE16 Police Station" },
+      { label:"Charity Home", icon:'💖', contact:"040-22113344", desc:"Teresa Charity Home" },
+      { label:"Grocery", icon:'🏪', contact:"040-33445531", desc:"Nehru Grocery Store" },
+      { label:"Public Hospital", icon:'🏥', contact:"040-55332211", desc:"SRM Public Hospital" },
+      { label:"NGO Centre", icon:'🏠', contact:"040-99887766", desc:"Garuda NGO Centre" },
+      { label:"Super Store", icon:'🏬', contact:"040-22446613", desc:"SMS Super Store" }
+    ],
+    hyderabad: [
+      { label:"Police Station", icon:'👮', contact:"100", desc:"Lal Bagh Police" },
+      { label:"Women NGO", icon:'👩‍🦰', contact:"040-12345678", desc:"Hyderabad Women Centre" },
+      { label:"Safe Home", icon:'🏡', contact:"040-98765432", desc:"Sai Safe Home" },
+      { label:"City Hospital", icon:'🏥', contact:"040-87654321", desc:"Hyderabad City Hospital" },
+      { label:"Support Desk", icon:'🛡️', contact:"040-33445566", desc:"Girls Helpdesk" }
+    ]
+  };
+
+  // ---------- Emergency Numbers ----------
+  const emergencyContacts = [
+    { icon:'👮‍♂️', number:"112", label:"Local Police" },
+    { icon:'👩‍🦰', number:"181", label:"Women Helpline" },
+    { icon:'🚑', number:"108", label:"Local Ambulance" },
+    { icon:'🚒', number:"101", label:"Fire & Rescue" }
+  ];
+
+  // ---------- Elements ----------
+  const helplineSection = document.getElementById('helplineSection');
+  const emergencySection = document.getElementById('emergencySection');
+  const tabHelplines = document.getElementById('tab-helplines');
+  const tabEmergency = document.getElementById('tab-emergency');
+  const addressInput = document.getElementById('addressInput');
+
+  // ---------- Functions ----------
+  function renderHelplines(area='default'){
+    let list = helplinesByArea[area] || helplinesByArea['default'];
+    helplineSection.innerHTML = '';
+    list.forEach((hl, i)=>{
+      helplineSection.innerHTML += `
+      <div class="card" style="animation-delay:${i*0.06}s">
+        <div class="card-icon">${hl.icon}</div>
+        <div class="card-label">${hl.label}</div>
+        <div class="card-small">${hl.desc}</div>
+        <button class="call-btn" onclick="window.open('tel:${hl.contact}')">📞</button>
+      </div>`;
+    });
+  }
+
+  function renderEmergencies(){
+    emergencySection.innerHTML = '';
+    emergencyContacts.forEach((e, i)=>{
+      emergencySection.innerHTML += `
+      <div class="emergency-card" style="animation-delay:${i*0.08}s">
+        <span class="emergency-icon">${e.icon}</span>
+        <div class="emergency-info">
+          <div class="emergency-number">${e.number}</div>
+          <div class="emergency-label">${e.label}</div>
+        </div>
+        <button class="call-btn" onclick="window.open('tel:${e.number}')">📞</button>
+      </div>`;
+    });
+  }
+
+  // ---------- Tab Switching ----------
+  tabHelplines.onclick = () => {
+    tabHelplines.classList.add('active');
+    tabEmergency.classList.remove('active');
+    helplineSection.classList.add('active');
+    emergencySection.classList.remove('active');
+  }
+  tabEmergency.onclick = () => {
+    tabHelplines.classList.remove('active');
+    tabEmergency.classList.add('active');
+    helplineSection.classList.remove('active');
+    emergencySection.classList.add('active');
+  }
+
+  // ---------- Area Input ----------
+  addressInput.addEventListener('input', ()=>{
+    let val = addressInput.value.trim().toLowerCase();
+    if(val.includes('hyderabad')) renderHelplines('hyderabad');
+    else renderHelplines('default');
+  });
+
+  // ---------- Initial Render ----------
+  renderHelplines();
+  renderEmergencies();
+
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Contact | NGO for Girls Welfare & Safety</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- Colors & Root Variables ---------- */
+    :root {
+      --faint-blue: #e6f0fa;
+      --primary-blue: #4B8CEB;
+      --white: #fff;
+      --text-base: #222a35;
+      --accent: #50bddc;
+      --card-hover: #f1f7fd;
+    }
+
+    /* ---------- Body & Container ---------- */
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--faint-blue);
+      color: var(--text-base);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 4px 32px rgba(60, 120, 180, 0.16);
+      padding: 32px 24px;
+      animation: fadeInUp 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes bounceIn {0%{transform: scale(0.8);}100%{transform:scale(1);}}
+
+    /* ---------- Header ---------- */
+    .header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .header img {
+      height: 100px;
+      width: 100px;
+    }
+    .title-block h1 {
+      font-size: 1.25em;
+      margin: 0;
+      color: var(--primary-blue);
+      font-weight: 700;
+    }
+    .title-block small {
+      color: var(--accent);
+      font-size: 0.92em;
+    }
+
+    /* ---------- Address Bar ---------- */
+    .address-bar {
+      margin: 28px 0 18px 0;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .address-bar input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 9px;
+      border: 1.5px solid var(--primary-blue);
+      background: #f5f9ff;
+      outline: none;
+    }
+    .address-bar input:focus { box-shadow: 0 2px 8px #E6F0FA; }
+
+    /* ---------- Tabs ---------- */
+    .tabs {
+      display: flex;
+      margin-bottom: 18px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 9px 9px 0 0;
+      border: none;
+      font-weight: bold;
+      color: var(--primary-blue);
+      background: var(--faint-blue);
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-right: 3px;
+    }
+    .tab.active { background: var(--primary-blue); color: var(--white); }
+
+    /* ---------- Lists ---------- */
+    .helpline-list, .emergency-list {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      animation: fadeIn 0.4s;
+    }
+    .helpline-list.active, .emergency-list.active { display: grid; }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      min-height: 110px;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.22s;
+    }
+    .card:hover {
+      transform: translateY(-4px) scale(1.03);
+      background: var(--card-hover);
+      box-shadow: 0 6px 18px rgba(76,142,224,0.12);
+    }
+    .card-icon { font-size: 2em; margin-bottom: 5px; }
+    .card-label { font-weight: bold; font-size: 1.05em; }
+    .card-small { font-size: 0.89em; color: #79a3cd; }
+    .call-btn {
+      position: absolute;
+      top: 9px; right: 9px;
+      width: 29px; height: 29px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.18em;
+      cursor: pointer;
+    }
+    .call-btn:active { background: var(--primary-blue); }
+
+    /* ---------- Emergency Cards ---------- */
+    .emergency-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, #e0ecff 0%, #ffffff 100%);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 15px;
+      animation: bounceIn 0.6s;
+    }
+    .emergency-icon { font-size: 1.5em; color: var(--primary-blue); margin-right: 10px; }
+    .emergency-number { font-weight: bold; color: var(--accent); font-size: 1.22em; }
+    .emergency-label { font-weight: 600; font-size: 1.07em; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 480px) {
+      .container { padding: 12px 4px; }
+      .header { flex-direction: column; align-items: flex-start;}
+      .helpline-list, .emergency-list { grid-template-columns: 1fr; gap: 15px;}
+    }
+    
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div><img src="logo.png" alt="logo"></div>
+    <div class="title-block">
+      <h1>Girls Welfare & Safety</h1>
+      <small>Emergency & Nearest Helplines</small>
+    </div>
+  </div>
+
+  <!-- Address Input -->
+  <div class="address-bar">
+    <span>🏠</span>
+    <input id="addressInput" placeholder="Enter your area or address">
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" id="tab-helplines">Nearby Helplines</button>
+    <button class="tab" id="tab-emergency">Emergency Numbers</button>
+  </div>
+
+  <!-- Lists -->
+  <div id="helplineSection" class="helpline-list active"></div>
+  <div id="emergencySection" class="emergency-list"></div>
+
+</div>
+<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close report form" onclick="closeModal()">×</button>
+      <h3 id="modalTitle">Report an Incident</h3>
+      <form id="reportForm" onsubmit="return submitReport(event)">
+        <input type="text" aria-label="Your Name" id="reportName" class="modal-input" placeholder="Your name (optional)" />
+        <input
+          type="text"
+          aria-label="Area or Address"
+          id="reportArea"
+          class="modal-input"
+          placeholder="Area or Address"
+          required
+        />
+        <textarea
+          id="reportMsg"
+          aria-label="Describe the incident"
+          placeholder="Describe the incident..."
+          class="modal-textarea"
+          rows="5"
+          required
+        ></textarea>
+        <button type="submit" class="modal-btn-submit">Send Report</button>
+      </form>
+      <div id="reportStatus" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+<script>
+  // ---------- Helpline Data ----------
+  const helplinesByArea = {
+    default: [
+      { label:"Police Station", icon:'👮', contact:"100", desc:"SE16 Police Station" },
+      { label:"Charity Home", icon:'💖', contact:"040-22113344", desc:"Teresa Charity Home" },
+      { label:"Grocery", icon:'🏪', contact:"040-33445531", desc:"Nehru Grocery Store" },
+      { label:"Public Hospital", icon:'🏥', contact:"040-55332211", desc:"SRM Public Hospital" },
+      { label:"NGO Centre", icon:'🏠', contact:"040-99887766", desc:"Garuda NGO Centre" },
+      { label:"Super Store", icon:'🏬', contact:"040-22446613", desc:"SMS Super Store" }
+    ],
+    hyderabad: [
+      { label:"Police Station", icon:'👮', contact:"100", desc:"Lal Bagh Police" },
+      { label:"Women NGO", icon:'👩‍🦰', contact:"040-12345678", desc:"Hyderabad Women Centre" },
+      { label:"Safe Home", icon:'🏡', contact:"040-98765432", desc:"Sai Safe Home" },
+      { label:"City Hospital", icon:'🏥', contact:"040-87654321", desc:"Hyderabad City Hospital" },
+      { label:"Support Desk", icon:'🛡️', contact:"040-33445566", desc:"Girls Helpdesk" }
+    ]
+  };
+
+  // ---------- Emergency Numbers ----------
+  const emergencyContacts = [
+    { icon:'👮‍♂️', number:"112", label:"Local Police" },
+    { icon:'👩‍🦰', number:"181", label:"Women Helpline" },
+    { icon:'🚑', number:"108", label:"Local Ambulance" },
+    { icon:'🚒', number:"101", label:"Fire & Rescue" }
+  ];
+
+  // ---------- Elements ----------
+  const helplineSection = document.getElementById('helplineSection');
+  const emergencySection = document.getElementById('emergencySection');
+  const tabHelplines = document.getElementById('tab-helplines');
+  const tabEmergency = document.getElementById('tab-emergency');
+  const addressInput = document.getElementById('addressInput');
+
+  // ---------- Functions ----------
+  function renderHelplines(area='default'){
+    let list = helplinesByArea[area] || helplinesByArea['default'];
+    helplineSection.innerHTML = '';
+    list.forEach((hl, i)=>{
+      helplineSection.innerHTML += `
+      <div class="card" style="animation-delay:${i*0.06}s">
+        <div class="card-icon">${hl.icon}</div>
+        <div class="card-label">${hl.label}</div>
+        <div class="card-small">${hl.desc}</div>
+        <button class="call-btn" onclick="window.open('tel:${hl.contact}')">📞</button>
+      </div>`;
+    });
+  }
+
+  function renderEmergencies(){
+    emergencySection.innerHTML = '';
+    emergencyContacts.forEach((e, i)=>{
+      emergencySection.innerHTML += `
+      <div class="emergency-card" style="animation-delay:${i*0.08}s">
+        <span class="emergency-icon">${e.icon}</span>
+        <div class="emergency-info">
+          <div class="emergency-number">${e.number}</div>
+          <div class="emergency-label">${e.label}</div>
+        </div>
+        <button class="call-btn" onclick="window.open('tel:${e.number}')">📞</button>
+      </div>`;
+    });
+  }
+
+  // ---------- Tab Switching ----------
+  tabHelplines.onclick = () => {
+    tabHelplines.classList.add('active');
+    tabEmergency.classList.remove('active');
+    helplineSection.classList.add('active');
+    emergencySection.classList.remove('active');
+  }
+  tabEmergency.onclick = () => {
+    tabHelplines.classList.remove('active');
+    tabEmergency.classList.add('active');
+    helplineSection.classList.remove('active');
+    emergencySection.classList.add('active');
+  }
+
+  // ---------- Area Input ----------
+  addressInput.addEventListener('input', ()=>{
+    let val = addressInput.value.trim().toLowerCase();
+    if(val.includes('hyderabad')) renderHelplines('hyderabad');
+    else renderHelplines('default');
+  });
+
+  // ---------- Initial Render ----------
+  renderHelplines();
+  renderEmergencies();
+
+</script>
+</body>
+</html>

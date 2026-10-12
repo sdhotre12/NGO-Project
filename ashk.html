@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Women's Safety Awareness Campaign</title>
+  <style>
+    /* ========== BASE STYLES ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ========== NAVBAR ========== */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: background 0.4s, box-shadow 0.3s;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 5%;
+    }
+
+    .navbar.scrolled {
+      background-color: #0033a0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #0033a0;
+      transform: scale(1.1);
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      background: url("https://www.freevector.com/uploads/vector/preview/32247/vecteezy_Woman-Empowerment-Awareness-Concept_ma1020_s.jpg") center/cover no-repeat;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .hero-content h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      animation: glowText 3s ease-in-out infinite alternate;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      background-color: #0033a0;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: white;
+      color: #0033a0;
+      transform: scale(1.05);
+    }
+
+    /* ========== CAMPAIGN SECTION ========== */
+    .campaign-section {
+      padding: 6rem 5% 4rem;
+      text-align: center;
+    }
+
+    .campaign-section h2 {
+      color: #0033a0;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro-text {
+      max-width: 650px;
+      margin: 0 auto 3rem;
+      color: #444;
+    }
+
+    .campaign-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .campaign-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transform: translateY(40px);
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+
+    .campaign-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .campaign-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .campaign-info {
+      padding: 1.5rem;
+    }
+
+    .campaign-info h3 {
+      color: #0033a0;
+      margin-bottom: 0.5rem;
+    }
+
+    .read-more {
+      color: #0033a0;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .read-more:hover {
+      color: #0050d0;
+      text-decoration: underline;
+    }
+
+    /* ========== QUOTE SECTION ========== */
+    .quote-section {
+      background: linear-gradient(to right, white, #0050d0);
+      color: white;
+      padding: 4rem 1rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.4rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background-color: #002da0;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* ========== MODAL POPUP ========== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color:#333 ;
+    }
+
+    .modal-content {
+      background-color: pink;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      text-align: left;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .close {
+      color: #0033a0;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #ff0000;
+    }
+
+    /* ========== BACK TO TOP ========== */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #0033a0;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      transition: background 0.3s, transform 0.3s;
+      z-index: 1500;
+    }
+
+    #backToTop:hover {
+      background-color: #0050d0;
+      transform: scale(1.1);
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes glowText {
+      from {
+        text-shadow: 0 0 10px #ffd700;
+      }
+      to {
+        text-shadow: 0 0 25px #fff;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero-content h2 {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header id="header">
+    <nav class="navbar">
+      <h1 class="logo">Secure Her</h1>
+      <ul class="nav-links">
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Empower. Educate. Protect.</h2>
+      <p>Together, we can create a safer world for women through awareness and action.</p>
+      <a href="#campaigns" class="btn">Explore Campaigns</a>
+    </div>
+  </section>
+
+  <!-- Campaigns -->
+  <section id="campaigns" class="campaign-section">
+    <h2>Our Awareness Campaigns</h2>
+    <p class="intro-text">Join our ongoing efforts to promote safety, awareness, and empowerment for women everywhere.</p>
+
+    <div class="campaign-container">
+      <div class="campaign-card">
+        <img src="https://as1.ftcdn.net/v2/jpg/08/16/25/82/1000_F_816258284_13hyztrbcNkkPdal4U7BedM8hrE3WY65.jpg" alt="Women practicing self-defense">
+        <div class="campaign-info">
+          <h3>School Sessions</h3>
+          <p>Free sessions teaching self-defense and confidence to young girls.</p>
+          <span class="read-more" data-info="Our school sessions are designed to empower young girls with the knowledge and physical skills to protect themselves.">Learn More →</span>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <img src="https://cdn.prod.website-files.com/64945c3b6498f55f8967ddbd/66cc4fa3236d6014094cfd10_cyber-security-awareness.webp" alt="Cyber safety awareness">
+        <div class="campaign-info">
+          <h3>Cyber Safety Awareness</h3>
+          <p>Workshops on digital privacy and dealing with online threats.</p>
+          <span class="read-more" data-info="We educate women and girls on how to stay safe online — from social media privacy to recognizing scams and harassment.">Learn More →</span>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" alt="Community outreach event">
+        <div class="campaign-info">
+          <h3>Community Drives</h3>
+          <p>Grassroots events promoting safety and solidarity.</p>
+          <span class="read-more" data-info="Through local workshops, talks, and street campaigns, we build awareness and encourage communities to stand for women’s rights.">Learn More →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section id="quote" class="quote-section">
+    <blockquote>"When women support each other, incredible things happen."</blockquote>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>2025 Women's Safety Project | Designed with ❤ by Team Secure Her</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="backToTop">↑</button>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modalTitle">Campaign Details</h3>
+      <p id="modalText"></p>
+    </div>
+  </div>
+
+  <script>
+    /* Navbar scroll effect */
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    /* Reveal animations on scroll */
+    const elements = document.querySelectorAll(".campaign-card, .quote-section");
+    const reveal = () => {
+      elements.forEach((el) => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+          el.style.opacity = 1;
+          el.style.transform = "translateY(0)";
+        }
+      });
+    };
+    window.addEventListener("scroll", reveal);
+    reveal();
+
+    /* Back to top button */
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      backToTop.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    /* Modal popup for campaign info */
+    const modal = document.getElementById("modal");
+    const modalText = document.getElementById("modalText");
+    const closeBtn = document.querySelector(".close");
+
+    document.querySelectorAll(".read-more").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        modalText.textContent = btn.dataset.info;
+        modal.style.display = "block";
+      });
+    });
+
+    closeBtn.addEventListener("click", () => (modal.style.display = "none"));
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  </script>
+</body>
+</html>

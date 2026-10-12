@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile Page</title>
+  <link rel="stylesheet" href="sec.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <div class="cover-photo"></div>
+
+      <div class="profile-card">
+        <!-- Profile Image -->
+        <div class="image-container">
+          <img
+            id="profileImage"
+            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"
+            alt="Profile"
+            class="profile-pic"
+          />
+          <input type="file" id="uploadImage" accept="image/*" hidden />
+          <button id="changePicBtn" class="change-pic-btn">Change Photo</button>
+        </div>
+
+        <h2 id="displayName">Asmita sargar </h2>
+        <p id="displayProfession" class="profession">Engineer</p>
+
+        <!-- Edit Button -->
+        <button id="editBtn" class="edit-btn">Edit Profile</button>
+
+        <!-- Profile Details -->
+        <form id="profileForm">
+          <label>Name:</label>
+          <input type="text" id="name" value="Asmita sargar" disabled />
+
+          <label>Age:</label>
+          <input type="number" id="age" value="20" disabled />
+
+          <label>Profession:</label>
+          <input type="text" id="profession" value="Engineer" disabled />
+
+          <label>City:</label>
+          <input type="text" id="city" value="kolhapur" disabled />
+
+          <label>Country:</label>
+          <input type="text" id="country" value="India" disabled />
+
+          <button type="button" id="saveBtn" class="save-btn hidden">Save</button>
+        </form>
+
+        <footer>2025 Women's Safety Project | Designed with ❤ by Team SecureHer</footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ======== Select elements =========
+    const editBtn = document.getElementById("editBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const inputs = document.querySelectorAll("#profileForm input");
+    const displayName = document.getElementById("displayName");
+    const displayProfession = document.getElementById("displayProfession");
+
+    const changePicBtn = document.getElementById("changePicBtn");
+    const uploadImage = document.getElementById("uploadImage");
+    const profileImage = document.getElementById("profileImage");
+
+    // ======== Edit button logic =========
+    editBtn.addEventListener("click", () => {
+      inputs.forEach((input) => (input.disabled = false));
+      editBtn.classList.add("hidden");
+      saveBtn.classList.remove("hidden");
+      changePicBtn.style.display = "block";
+    });
+
+    // ======== Save button logic =========
+    saveBtn.addEventListener("click", () => {
+      inputs.forEach((input) => (input.disabled = true));
+      editBtn.classList.remove("hidden");
+      saveBtn.classList.add("hidden");
+      changePicBtn.style.display = "none";
+
+      // Update profile display
+      displayName.textContent = document.getElementById("name").value;
+      displayProfession.textContent =
+        document.getElementById("profession").value;
+    });
+
+    // ======== Change profile image =========
+    changePicBtn.addEventListener("click", () => {
+      uploadImage.click();
+    });
+
+    uploadImage.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          profileImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
+

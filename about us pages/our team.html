@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team | SecureHer</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* === General Styling === */
+body {
+  margin: 0;
+  background: radial-gradient(circle at center, #001d50, #2704b3, #1b1b1bd5);
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* === Light Rays === */
+.rays {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(45deg, rgba(255,94,120,0.1) 0, rgba(255,94,120,0.1) 1px, transparent 1px, transparent 50px);
+  animation: moveRays 10s linear infinite;
+  z-index: 0;
+}
+@keyframes moveRays {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
+}
+
+/* === Header === */
+header {
+  text-align: center;
+  padding: 40px 10px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #ff5e78;
+  letter-spacing: 3px;
+  z-index: 2;
+}
+
+/* === Team Layout === */
+.team-section {
+  z-index: 2;
+  position: relative;
+  padding: 50px 20px 80px;
+}
+
+/* Flex containers for rows */
+.team-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+/* === Team Card === */
+.team-member {
+  background: rgba(255,255,255,0.05);
+  border: 2px solid #ff5e78;
+  border-radius: 20px;
+  width: 250px;
+  height: 330px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(255,94,120,0.3);
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.team-member:hover {
+  transform: rotateY(10deg) rotateX(10deg) scale(1.05);
+  box-shadow: 0 0 35px rgba(255,94,120,0.6);
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #ff5e78;
+  margin-bottom: 15px;
+}
+
+.team-member h3 {
+  color: #ff5e78;
+  font-size: 1.3rem;
+  margin: 10px 0 5px;
+}
+
+.team-member p {
+  font-size: 0.9rem;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid #333;
+  background: #0c0c0c;
+}
+</style>
+</head>
+<body>
+<div class="rays"></div>
+
+<header>Meet Our Team</header>
+
+<section class="team-section">
+
+  <!-- === Row 1 (3 Members) === -->
+  <div class="team-row">
+    <div class="team-member">
+      <img src="../mineImage.png" alt="Member 1">
+      <h3>Aiahwarya Patil</h3>
+      <p>Project Lead & Designer<br>Ensures the vision, coordination, and creative direction of SecureHer.</p>
+    </div>
+
+    <div class="team-member">
+      <img src="shivu shinde.jpg" alt="Member 2">
+      <h3>Shivanjali Shinde</h3>
+      <p>Frontend Developer<br>Brings our user interface to life with responsive, interactive designs.</p>
+    </div>
+
+    <div class="team-member">
+      <img src="../asmita.jpeg" alt="Member 3">
+      <h3>Asmita Sargar</h3>
+      <p>Backend Developer<br>Handles data security, APIs, and system logic for smooth functioning.</p>
+    </div>
+  </div>
+
+  <!-- === Row 2 (2 Members) === -->
+  <div class="team-row">
+    <div class="team-member">
+      <img src="../saniya.png" alt="Member 4">
+      <h3>Saniya Suryawanshi</h3>
+      <p>AI & Safety Systems Engineer<br>Develops real-time alert systems powered by smart algorithms.</p>
+    </div>
+
+    <div class="team-member">
+      <img src="../pranali.jpg" alt="Member 5">
+      <h3>Pranali Patil</h3>
+      <p>Research & Content Strategist<br>Focuses on awareness, education, and impactful communication.</p>
+    </div>
+  </div>
+
+</section>
+
+<footer>© 2025 SecureHer | Designed with ❤ by Team SecureHer</footer>
+
+</body>
+</html>

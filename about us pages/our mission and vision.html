@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision & Mission | SecureHer</title>
+
+<!-- === Fonts & GSAP === -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+/* === General Styling === */
+  body {
+  margin: 0;
+  padding: 0;
+  /* 🖼 Add your image and keep gradient overlay */
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), /* dark overlay */
+    url("https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1600&q=80") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+
+/* === Floating Particle Background === */
+.particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: #ff5e78;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  from { transform: translateY(0) translateX(0); opacity: 0.6; }
+  to { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+
+/* === Animated Header === */
+header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-size: 3rem;
+  padding: 60px 10px 30px;
+  font-weight: 600;
+  color: #ff5e78;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+/* === Section Container === */
+section {
+  max-width: 900px;
+  margin: auto;
+  padding: 10px 15px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+/* === Vision Section === */
+.vision h2, .mission h2 {
+  color: #ff5e78;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+
+}
+
+.vision p {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: #f1f1f1;
+  opacity: 0.9;
+}
+
+/* === Mission Section === */
+.mission {
+  border-left: 3px solid #ff5e78;
+  padding-left: 30px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.mission ul {
+  list-style: square;
+  padding-left: 20px;
+}
+
+.mission li {
+  margin: 12px 0;
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #eaeaea;
+}
+
+/* === Light Rays === */
+.rays {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(45deg, rgba(255,94,120,0.07) 0, rgba(255,94,120,0.07) 1px, transparent 1px, transparent 50px);
+  animation: moveRays 10s linear infinite;
+  z-index: 1;
+}
+@keyframes moveRays {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 25px;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid #333;
+  background: #0c0c0c;
+  z-index: 3;
+}
+</style>
+</head>
+
+<body>
+<div class="rays"></div>
+<div class="particles"></div>
+
+<header id="title3d">Our Vision & Mission</header>
+
+<section class="vision" id="vision">
+  <h2>Our Vision</h2>
+  <p>
+    Our vision is to build a world where every woman can live fearlessly and confidently, both online and offline. 
+    We aim to become a trusted digital companion that ensures women’s safety through innovation and technology. 
+    We envision a society free from harassment, discrimination, and fear—one that upholds respect, equality, and empowerment. 
+    Through knowledge, awareness, and community support, we strive to empower women to protect and uplift themselves while
+    inspiring collective responsibility among individuals, communities, and organizations to create a safer and more inclusive 
+    future for all.
+  </p>
+</section>
+
+<section class="mission" id="mission">
+  <h2>Our Mission</h2>
+  <ul>
+    <li>To create a secure, supportive, and empowering environment for women.</li>
+    <li>To leverage technology, awareness, and community engagement for women’s safety.</li>
+    <li>To promote awareness campaigns, educational content, and self-defense resources that build confidence and protection skills.</li>
+    <li>Promote gender equality and connect women with legal, mental health, and social resources.</li>
+    <li>Collaborate with law enforcement, NGOs, and government organizations for greater impact.</li>
+    <li>To support anonymous reporting and encourage women to speak up against harassment.</li>
+    <li>To foster a society where every woman feels safe, heard, and valued—both online and offline.</li>
+    <li>Innovate technology-driven solutions that uphold dignity, respect, and security for every woman.</li>
+  </ul>
+</section>
+
+<footer>© 2025 SecureHer | Designed with ❤ by Team SecureHer</footer>
+
+<!-- === GSAP 3D Text + Scroll Animation === -->
+<script>
+// Floating particles
+const particleContainer = document.querySelector('.particles');
+for (let i = 0; i < 50; i++) {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.top = Math.random() * 100 + '%';
+  particle.style.animationDuration = 5 + Math.random() * 8 + 's';
+  particleContainer.appendChild(particle);
+}
+
+// 3D text floating animation
+gsap.to("#title3d", {
+  duration: 4,
+  rotationX: 25,
+  rotationY: 15,
+  yoyo: true,
+  repeat: -1,
+  ease: "sine.inOut"
+});
+
+// Scroll-triggered animations
+gsap.from(".vision h2", { opacity: 0, y: 50, duration: 1, scrollTrigger: ".vision h2" });
+gsap.from(".vision p", { opacity: 0, y: 70, duration: 1.2, scrollTrigger: ".vision p" });
+gsap.from(".mission h2", { opacity: 0, x: -100, duration: 1, scrollTrigger: ".mission h2" });
+gsap.from(".mission li", {
+  opacity: 0,
+  x: 50,
+  stagger: 0.2,
+  duration: 0.8,
+  scrollTrigger: ".mission li"
+});
+</script>
+<script>
+window.addEventListener('scroll', () => {
+  const offset = window.scrollY * 0.3;
+  document.body.style.backgroundPositionY = ${offset}px;
+});
+</script>
+</body>
+</html>

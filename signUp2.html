@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NGO Girls Welfare & Safety - Login</title>
+  <!-- AOS Scroll Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       background-image: url('lg_back.png');
+      background-size: cover;
+      background-position: center;
+      /* background-size: 300% 300%; */
+      animation: gradientFlow 12s ease infinite;
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      height: 520px;
+      position: relative;
+    }
+
+    .form-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .form-container.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Login Container */
+    .login-container {
+      flex-direction: row-reverse;
+    }
+
+    .login-container .form-section {
+      /* background: rgba(10, 15, 60, 0.8); */
+      background-image: url('login_back2.jpg');
+      background-size: cover;
+      background-position: center;
+      clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+    }
+
+    .login-container .welcome-section {
+      background: rgba(255, 255, 255, 0.1);
+      clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Sign Up Container */
+    .signup-container {
+      flex-direction: row;
+    }
+
+    .signup-container .form-section {
+      /* background: rgba(10, 15, 60, 0.8); */
+      background-image: url('login_back2.jpg');
+      background-size: cover;
+      background-position: center;
+      clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .signup-container .welcome-section {
+      background: rgba(255, 255, 255, 0.1);
+      clip-path: polygon(0 0, 70% 0, 100% 100%, 0 100%);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Form Section */
+    .form-section {
+      /* background: rgba(10, 37, 64, 0.85); */
+      /* background-image: url('login_back.jpg');
+      background-size: cover;
+      background-position: center; */
+      box-shadow: 0 8px 25px rgba(10, 37, 64, 0.3);
+      border-radius: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      color: white;
+    }
+
+    .form-section h2 {
+      font-size: 40px;
+      margin-bottom: 30px;
+      font-weight: 600;
+      /* text-transform: lowercase; */
+    }
+
+    .form-section form {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border: none;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .input-group input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: lowercase;
+    }
+
+    .input-group input:focus {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .input-group .icon {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 25px;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;                     
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #1B56FD, #0A2540);
+      color: #FFFFFF;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(27, 86, 253, 0.3);
+      font-size: 14px;
+      cursor: pointer;
+      text-transform: lowercase;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+  background: linear-gradient(135deg, #0A2540, #1B56FD);
+  box-shadow: 0 6px 25px rgba(27, 86, 253, 0.5);
+  transform: translateY(-2px);
+    }
+
+    .toggle-text {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: rgb(255, 255, 255);
+    }
+
+    .toggle-text a {
+      color: #000000;
+      transition: color 0.3s ease;     
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .toggle-text a:hover {
+        color: #FFFFFF;
+        text-decoration: underline;
+    }
+
+    /* Welcome Section */
+    .welcome-section {
+      background: rgba(233, 237, 247, 0.7);
+      color: #0A2540;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .welcome-section h1 {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .welcome-section p {
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 1.0;
+      max-width: 250px;
+    }
+
+    /* Social Buttons */
+    .social-login {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 280px;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      transition: all 0.3s ease;  
+      border: none;
+      border-radius: 25px;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .social-btn:hover {
+          background: rgba(27, 86, 253, 0.3);
+          transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        height: auto;
+        max-width: 100%;
+      }
+
+      .form-container {
+        position: relative;
+        flex-direction: column !important;
+        height: auto;
+      }
+
+      .form-section,
+      .welcome-section {
+        clip-path: none !important;
+        width: 100%;
+        padding: 30px 20px;
+      }
+
+      .welcome-section {
+        order: -1;
+      }
+
+      .form-section h2 {
+        font-size: 24px;
+      }
+
+      .social-login {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Login Form -->
+    <div class="form-container login-container" id="loginContainer">
+      <div class="form-section">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="input-group">
+            <input type="text" placeholder="username" required />
+            <span class="icon">👤</span>
+          </div>
+          <div class="input-group">
+            <input type="password" placeholder="password" required />
+            <span class="icon">🔒</span>
+          </div>
+          <button type="submit" class="btn">login</button>
+        </form>
+
+        <div class="social-login">
+          <button class="social-btn" onclick="handleSocialLogin('google')"><i class="fa-brands fa-google fa-lg" style="color: #EA4335;"></i> Google</button>
+          <button class="social-btn" onclick="handleSocialLogin('facebook')"><i class="fa-brands fa-facebook fa-lg" style="color: #0043b8;"></i> Facebook</button>
+          <button class="social-btn" onclick="handleSocialLogin('apple')"><i class="fa-brands fa-apple fa-lg" style="color: #e50000;"></i> Apple</button>
+          <button class="social-btn" onclick="handleSocialLogin('github')"><i class="fa-brands fa-github fa-lg" style="color: #000000;"></i> GitHub</button>
+        </div>
+
+        <p class="toggle-text">Don't have an account? <a href="#" onclick="toggleForms(event)">sign up</a></p>
+      </div>
+
+      <div class="welcome-section">
+        <h1>WELCOME<br>BACK !</h1>
+        <p>Empowering girls through safety, education, and awareness initiatives.</p>
+      </div>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="form-container signup-container hidden" id="signupContainer">
+      <div class="welcome-section">
+        <h1>JOIN<br>OUR MISSION</h1>
+        <p>Be part of change — together, we create a safer and brighter world for girls.</p>
+      </div>
+
+      <div class="form-section">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+          <div class="input-group">
+            <input type="text" placeholder="username" required />
+            <span class="icon">👤</span>
+          </div>
+          <div class="input-group">
+            <input type="email" placeholder="email" required />
+            <span class="icon">✉️</span>
+          </div>
+          <div class="input-group">
+            <input type="password" placeholder="password" required />
+            <span class="icon">🔒</span>
+          </div>
+          <button type="submit" class="btn">sign up</button>
+        </form>
+        <p class="toggle-text">Already have an account? <a href="#" onclick="toggleForms(event)">login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleForms(event) {
+      event.preventDefault();
+      const loginContainer = document.getElementById('loginContainer');
+      const signupContainer = document.getElementById('signupContainer');
+      loginContainer.classList.toggle('hidden');
+      signupContainer.classList.toggle('hidden');
+    }
+
+    function handleSocialLogin(provider) {
+      alert(`Redirecting to ${provider} login...`);
+      console.log(`Redirecting to ${provider} OAuth...`);
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Login functionality would be implemented here');
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Sign-up functionality would be implemented here');
+    });
+  </script>
+</body>
+</html>

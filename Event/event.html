@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events & Workshops | NGO</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* ------------------ Header ------------------ */
+     header {
+    background:linear-gradient(150deg,#FFF8F8,#0118D8,#1B56FD,#E9DFC3);;
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  header .container {
+    text-align: center; /* centers all inside */
+  }
+
+  header h1 {
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centers logo + text together */
+    gap: 10px;
+    margin-bottom: 10px; /* space between title and navbar */
+  }
+
+  header h1 img {
+    height: 100px;
+    width: 100px;
+    vertical-align: middle;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-evenly;
+    align-items: center;
+    display: inline-flex; /* align links in one line */
+    gap: 30px;
+    width: 90%;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  nav ul li a:hover {
+    text-decoration: underline;
+    color: #ffde59;
+  }
+  .nav-links li a.active {
+  color: #FFD700;
+  border-bottom: 2px solid #FFD700;
+}
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 10px 15px;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Add dropdown arrow */
+    .dropdown > a::after {
+      content: " ▼";
+      font-size: 12px;
+    }
+    /* ---------- LOGIN BUTTON ------------- */
+.login-btn {
+  background: linear-gradient(130deg, #f7ff11, #e916e6);
+  color: #000000;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+  transition: all 0.3s ease;
+  transform: perspective(500px) translateZ(0);
+}
+/* Hover 3D animation */
+.login-btn:hover {
+  transform: perspective(500px) translateZ(10px);
+  box-shadow: 0 10px 20px rgba(106, 13, 173, 0.6);
+}
+
+/* Click effect */
+.login-btn:active {
+  transform: perspective(500px) translateZ(3px);
+  box-shadow: 0 3px 10px rgba(106, 13, 173, 0.3);
+}
+
+.icon {
+  font-size: 18px;
+}
+    .sub-services {
+  padding: 80px 0;
+  text-align: center;
+  background: #f8faff;
+}
+
+.sub-services h1 {
+  font-size: 38px;
+  color: #1E3A8A;
+  margin-bottom: 40px;
+}
+
+.sub-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.sub-container .card {
+  background: white;
+  width: 300px;
+  border-radius: 15px;
+  padding: 25px 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.sub-container .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.sub-container .card h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #1E3A8A;
+}
+
+.sub-container .card p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.sub-container .card a {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #1E3A8A;
+  color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.sub-container .card a:hover {
+  background: #2563EB;
+}
+.nav-links li a.active {
+  color: #FFD700;
+  border-bottom: 2px solid #FFD700;
+}
+  /* ------------------ Footer ------------------ */
+    footer {
+      background: linear-gradient(150deg,#E9DFC3,#0118D8,#1B56FD,#E9DFC3);;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+<body>
+      <!-- Header -->
+  <header>
+  <div class="container">
+    <h1> <img src="../logo.png" alt="Logo" data-aos="zoom-in-down">Her Voice, Her Power</h1>
+    <nav>
+     <ul>
+       <a href="../home.html">Home</a>
+        <!-- About Us Dropdown -->
+      <li class="dropdown">
+        <a href="../about3.html">About Us</a>
+        <div class="dropdown-content">
+          <a href="vision.html">Vision & Mission</a>
+          <a href="team.html">Our Team</a>
+          <a href="journey.html">Our Journey</a>
+        </div>
+      </li>
+        <!-- Initiative Dropdown -->
+      <li class="dropdown">
+        <a href="#">Initiatives</a>
+        <div class="dropdown-content">
+          <a href="../sdg.html">Self Defence Training</a>
+          <a href="../team.html">Awareness Campaigns</a>
+          <a href="edu.html">Education Programs</a>
+        </div>
+      </li>
+       <!-- Reports and Research Dropdown -->
+      <li class="dropdown">
+        <a href="#">Reports and Research</a>
+        <div class="dropdown-content">
+          <a href="AnnualR.html">Annual Reports</a>
+          <a href="caseStd.html">Case studies</a>
+          <a href="Public.html">Publications</a>
+        </div>
+      </li>
+        <!-- Legal rights Dropdown -->
+      <li class="dropdown">
+        <a href="#">Legal rights</a>
+        <div class="dropdown-content">
+          <a href="WPL.html">Women Protection Laws</a>
+          <a href="complaint.html">Complaint Procedure</a>
+          <a href="LAC.html">Legal Aid Center</a>
+        </div>
+      </li>
+       <!-- Get Involved -->
+      <li class="dropdown">
+         <a href="#">Get Involved</a>
+         <div class="dropdown-content">
+          <a href="volForm.html">Volunteer Form</a>
+          <a href="donate.html">Donate</a>
+         </div>
+      </li>
+       <!-- FAQ's  -->
+      <a href="FAQ.html">FAQ'S</a>
+      <!-- feedback  -->
+      <a href="feedback.html">Feedback</a>
+      <!-- <button data-aos="flip-right" id="donate"><a href="donate.html">Donate Our NGO</a></button> -->
+       <button class="login-btn" onclick="window.location.href='../login.html'">
+    <span class="icon">👤</span> Log In
+  </button>
+     </ul>
+    </nav>
+<div id="noResults" style="color:#ffde59; font-weight:600; display:none; margin-top:5px;">
+  <!-- No matching text found -->
+</div>
+
+    </div>
+  </div>
+  </header>
+  <section class="sub-services">
+    <h1>Events & Workshops</h1>
+    <div class="sub-container">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h2><i class="fa-solid fa-clock-rotate-left" style="color: black;"></i> Past Events</h2>
+        <p>Explore reports and memories from our past programs.</p>
+        <a href="past.html">View Past Events</a>
+      </div>
+
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <h2><i class="fa-solid fa-calendar-plus" style="color: rgb(255, 58, 91);"></i> Upcoming Events</h2>
+        <p>Join us in our upcoming initiatives and workshops.</p>
+        <a href="../EVE4.html">View Upcoming</a>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Women's Safety Project | Designed with ❤️ by Team SecureHer</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Journey | SecureHer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at center, #090909, #121212, #1b1b1b);
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* === Header === */
+header {
+  text-align: center;
+  padding: 60px 10px 20px;
+  color: #ff5e78;
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px #ff5e78;
+}
+
+/* === Timeline Section === */
+.timeline {
+  position: relative;
+  max-width: 950px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #ff5e78, transparent);
+  transform: translateX(-50%);
+  animation: glowLine 2s ease-in-out infinite alternate;
+}
+@keyframes glowLine {
+  from { box-shadow: 0 0 10px #ff5e78; }
+  to { box-shadow: 0 0 25px #ff5e78; }
+}
+
+/* === Timeline Item === */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 25px 35px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,94,120,0.4);
+  border-radius: 15px;
+  margin: 50px 0;
+  backdrop-filter: blur(5px);
+  transition: all 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.timeline-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(255,94,120,0.4);
+}
+
+.timeline-item h3 {
+  color: #ff5e78;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.timeline-item p {
+  color: #ccc;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* === Timeline Images === */
+.timeline-item img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  border: 2px solid #ff5e78;
+  box-shadow: 0 0 20px rgba(255,94,120,0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.timeline-item img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255,94,120,0.6);
+}
+
+/* === Position alternation === */
+.timeline-item.left {
+  left: 0;
+  text-align: left;
+}
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  top: 25px;
+  width: 16px;
+  height: 16px;
+  background: #ff5e78;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #ff5e78;
+}
+.timeline-item.left::after { right: -9px; }
+.timeline-item.right::after { left: -9px; }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .timeline::before { left: 8px; }
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 40px;
+    text-align: left;
+  }
+  .timeline-item::after {
+    left: 10px;
+  }
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 25px;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid #333;
+  background: #0c0c0c;
+}
+</style>
+</head>
+
+<body>
+<header>Our Journey</header>
+
+<div class="timeline">
+
+  <div class="timeline-item left">
+    <img src="women safety.cms" alt="Idea Stage">
+    <h3>2025 August — The Idea</h3>
+    <p>It all began with a vision to create a safer environment for women using the power of technology and innovation.</p>
+  </div>
+
+  <div class="timeline-item right">
+    <img src="prototype img.jpg" alt="Prototype Development">
+    <h3>2025 September — The Prototype</h3>
+    <p>Our team developed the first version of SecureHer — an AI-based safety alert and community support platform.</p>
+  </div>
+
+  <div class="timeline-item left">
+    <img src="real impact image.avif" alt="Community Impact">
+    <h3>2025 October — Real Impact</h3>
+    <p>SecureHer partnered with NGOs and government organizations, reaching over 50,000 women through awareness drives and training sessions.</p>
+  </div>
+
+  <div class="timeline-item right">
+    <img src="future goal img.webp" alt="Future Goals">
+    <h3>2026 — Future Goals</h3>
+    <p>Expanding globally to make SecureHer an international platform for women’s empowerment, awareness, and safety.</p>
+  </div>
+
+</div>
+
+<footer>© 2025 SecureHer | Designed with ❤ by Team SecureHer</footer>
+
+<script>
+// GSAP Scroll Animation
+gsap.utils.toArray(".timeline-item").forEach((item, i) => {
+  gsap.from(item, {
+    opacity: 0,
+    y: 100,
+    duration: 1,
+    scrollTrigger: {
+      trigger: item,
+      start: "top 85%",
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Need Help? | SecureHer AI Chatbot</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at top left, #2b1055, #000);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 40px 20px 10px;
+  color: #ff77aa;
+  font-size: 2.5rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Chat Container */
+.chat-container {
+  width: 90%;
+  max-width: 600px;
+  height: 70vh;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 94, 120, 0.2);
+}
+
+/* Chat Messages */
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.message {
+  margin: 12px 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.message.user p {
+  background: linear-gradient(90deg, #ff5e78, #ff77aa);
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.message.bot p {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.message p {
+  padding: 12px 16px;
+  border-radius: 15px;
+  max-width: 80%;
+  line-height: 1.5;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Input Area */
+.chat-input {
+  display: flex;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chat-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  padding: 10px;
+}
+
+.chat-input button {
+  background: linear-gradient(90deg, #ff5e78, #ff77aa);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.chat-input button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 94, 120, 0.5);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Floating Glow Animation */
+.glow {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(255,94,120,0.25), transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+  z-index: 0;
+}
+.glow.one { top: 10%; left: 10%; animation-delay: 0s; }
+.glow.two { bottom: 20%; right: 15%; animation-delay: 3s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.1); }
+}
+</style>
+</head>
+
+<body>
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<header>💬 Need Help? Chat with SecureHer AI</header>
+
+<div class="chat-container">
+  <div class="chat-messages" id="chatMessages">
+    <div class="message bot"><p>👋 Hello! I’m SecureHer AI — how can I help you today?</p></div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<footer>© 2025 SecureHer | Your Safety, Our Priority 💖</footer>
+
+<script>
+const chatMessages = document.getElementById("chatMessages");
+const userInput = document.getElementById("userInput");
+
+function sendMessage() {
+  const text = userInput.value.trim();
+  if (text === "") return;
+
+  // Display user message
+  appendMessage("user", text);
+  userInput.value = "";
+
+  // Simulate AI reply
+  setTimeout(() => {
+    const reply = getBotReply(text);
+    appendMessage("bot", reply);
+  }, 700);
+}
+
+function appendMessage(sender, text) {
+  const msgDiv = document.createElement("div");
+  msgDiv.classList.add("message", sender);
+  msgDiv.innerHTML = <p>${text}</p>;
+  chatMessages.appendChild(msgDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function getBotReply(input) {
+  const lower = input.toLowerCase();
+  if (lower.includes("help") || lower.includes("safety"))
+    return "You can always reach the nearest police helpline (112) or use our Emergency SOS feature for immediate help.";
+  if (lower.includes("laws") || lower.includes("rights"))
+    return "Women’s rights are protected under various acts like the Maternity Benefit Act (1961), Equal Remuneration Act (1976), and more. Would you like me to list them?";
+  if (lower.includes("thank"))
+    return "You're most welcome 💖 Stay safe and strong!";
+  if (lower.includes("contact"))
+    return "You can contact our SecureHer team through the Support section of our website.";
+  return "I'm here to assist you with safety tips, women’s rights info, or emergency guidance. How can I help?";
+}
+
+// Animate header with GSAP
+gsap.from("header", { opacity: 0, y: -50, duration: 1.2, ease: "power2.out" });
+gsap.from(".chat-container", { opacity: 0, scale: 0.9, duration: 1.2, ease: "back.out(1.5)" });
+</script>
+
+</body>
+</html>
